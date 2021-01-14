@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const cameraRoutes = require("./routes/camera");
+const viewsRoutes = require("./routes/views");
 
 const app = express();
 
@@ -20,6 +21,10 @@ mongoose
     console.error(error);
   });
 
+// Definition of the views folder + the view engine pug
+app.set("views", path.join(__dirname, "../frontend/views"));
+app.set("view engine", "pug");
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -33,10 +38,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+// Accessing to every files within the public folder
+app.use(express.static(path.join(__dirname, "../frontend/public/")));
 
 app.use(bodyParser.json());
 
 app.use("/api/cameras", cameraRoutes);
+
+app.use(viewsRoutes);
 
 module.exports = app;

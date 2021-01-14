@@ -1,0 +1,14 @@
+header
+  .logo
+    a(href="/")
+      h1 
+        i.fas.fa-shopping-cart
+        |Orinoco
+  nav
+    ul.menu
+      li(class=(path === "/" ? "menu-item active" : "menu-item"))
+        a(href="/") Accueil
+      li(class=(path === "/cart" ? "menu-item active" : "menu-item"))
+        a(href="/cart") 
+          i.fas.fa-shopping-cart 
+          span.article-nb 0
