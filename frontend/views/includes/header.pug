@@ -2,13 +2,13 @@ header
   .logo
     a(href="/")
       h1 
-        i.fas.fa-shopping-cart
-        |Orinoco
+        i.fas.fa-shopping-cart.
+          Orinoco
   nav
     ul.menu
-      li(class=(path === "/" ? "menu-item active" : "menu-item"))
+      li(class=["menu-item", path === "/" ? "active" : ""])
         a(href="/") Accueil
-      li(class=(path === "/cart" ? "menu-item active" : "menu-item"))
+      li(class=["menu-item", path === "/cart" ? "active" : ""])
         a(href="/cart") 
           i.fas.fa-shopping-cart 
           span.article-nb 0
