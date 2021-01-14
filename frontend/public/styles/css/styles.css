@@ -70,6 +70,7 @@ strong {
   grid: "header" auto "main" 1fr "footer" auto / auto; }
 
 header {
+  width: 100vw;
   grid-area: header;
   background: var(--dark);
   display: flex;
@@ -115,9 +116,24 @@ main {
   align-items: center; }
 
 footer {
+  width: 100vw;
   grid-area: footer;
   background: var(--dark-grey);
   color: #fff;
   font-size: 1.8rem;
   text-align: center;
   padding: 1rem; }
+
+.gallery-container {
+  height: 100%;
+  min-width: 100vw;
+  display: flex;
+  align-items: center; }
+  .gallery-container section .gallery-item {
+    width: 600px;
+    margin: 3rem; }
+    .gallery-container section .gallery-item figure {
+      background: #fff;
+      padding: 1rem;
+      box-shadow: var(--box-shadow);
+      border-radius: 0.4rem; }
