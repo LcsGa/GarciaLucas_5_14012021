@@ -64,76 +64,94 @@ a {
 strong {
   color: var(--accent); }
 
-#container {
-  min-height: 100vh;
-  display: grid;
-  grid: "header" auto "main" 1fr "footer" auto / auto; }
-
-header {
-  width: 100vw;
-  grid-area: header;
-  background: var(--dark);
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28); }
-  header .logo {
-    padding: 1rem 2rem; }
-    header .logo h1 {
-      font-family: var(--special-font);
-      font-size: 3rem;
-      font-weight: 500;
-      margin: 0; }
-      header .logo h1 i {
-        margin-right: 1.5rem; }
-  header a {
-    color: #fff; }
-  header nav {
-    height: 100%; }
-    header nav .menu {
-      display: flex;
-      padding-right: -3rem;
-      height: 100%; }
-      header nav .menu .menu-item {
-        font-size: 1.8rem; }
-        header nav .menu .menu-item a {
-          display: flex;
-          align-items: center;
-          height: 100%;
-          width: 100%;
-          padding: 0 3rem 0.25rem 3rem; }
-        header nav .menu .menu-item i {
-          margin-right: 0.3rem; }
-        header nav .menu .menu-item .article-nb {
-          margin-bottom: -0.25rem; }
-
-main {
-  grid-area: main;
-  background: var(--divider);
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-footer {
-  width: 100vw;
-  grid-area: footer;
-  background: var(--dark-grey);
-  color: #fff;
-  font-size: 1.8rem;
-  text-align: center;
-  padding: 1rem; }
-
 .gallery-container {
   height: 100%;
   min-width: 100vw;
   display: flex;
   align-items: center; }
   .gallery-container section .gallery-item {
-    width: 600px;
+    height: 50rem;
+    width: 60rem;
     margin: 3rem; }
     .gallery-container section .gallery-item figure {
+      height: 100%;
       background: #fff;
       padding: 1rem;
       box-shadow: var(--box-shadow);
-      border-radius: 0.4rem; }
+      border-radius: 0.4rem;
+      display: flex;
+      flex-direction: column; }
+      .gallery-container section .gallery-item figure .article-img {
+        flex: 4;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .gallery-container section .gallery-item figure .article-img img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover; }
+      .gallery-container section .gallery-item figure figcaption {
+        flex: 1; }
+        .gallery-container section .gallery-item figure figcaption header {
+          display: flex;
+          justify-content: space-between; }
+          .gallery-container section .gallery-item figure figcaption header p {
+            font-size: 2.5rem;
+            font-weight: 700; }
+
+#container {
+  min-height: 100vh;
+  display: grid;
+  grid: "header" auto "main" 1fr "footer" auto / auto; }
+  #container > header {
+    width: 100vw;
+    grid-area: header;
+    background: var(--dark);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28); }
+    #container > header .logo {
+      padding: 1rem 2rem; }
+      #container > header .logo h1 {
+        font-family: var(--special-font);
+        font-size: 3rem;
+        font-weight: 500;
+        margin: 0; }
+        #container > header .logo h1 i {
+          margin-right: 1.5rem; }
+    #container > header a {
+      color: #fff; }
+    #container > header nav {
+      height: 100%; }
+      #container > header nav .menu {
+        display: flex;
+        padding-right: -3rem;
+        height: 100%; }
+        #container > header nav .menu .menu-item {
+          font-size: 1.8rem; }
+          #container > header nav .menu .menu-item a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            padding: 0 3rem 0.25rem 3rem; }
+          #container > header nav .menu .menu-item i {
+            margin-right: 0.3rem; }
+          #container > header nav .menu .menu-item .article-nb {
+            margin-bottom: -0.25rem; }
+  #container main {
+    grid-area: main;
+    background: var(--divider);
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  #container footer {
+    width: 100vw;
+    grid-area: footer;
+    background: var(--dark-grey);
+    color: #fff;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 1rem; }
