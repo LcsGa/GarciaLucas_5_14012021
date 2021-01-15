@@ -4,10 +4,12 @@
 @import "media-queries";
 @import "utils";
 @import "base";
-@import "./components/article";
+@import "./components/home-article";
+@import "./components/cart-article";
 
 #container {
   min-height: 100vh;
+  max-width: 1920px;
   display: grid;
   grid:
     "header" auto

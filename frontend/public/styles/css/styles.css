@@ -1,7 +1,8 @@
+@charset "UTF-8";
 :root {
   --primary: #3498db;
   --dark: #2980b9;
-  --accent: #2c3e50;
+  --accent: #145d8d;
   --text: #333;
   --divider: #ecf0f1;
   --dark-grey: #324355;
@@ -20,6 +21,31 @@
 .active {
   font-weight: 700;
   background: var(--primary); }
+
+.btn {
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.5s ease-in-out; }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff; }
+    .btn-primary:hover {
+      background: var(--dark); }
+  .btn-danger {
+    background: #fff;
+    color: #d00;
+    border: 1px solid #d00; }
+    .btn-danger:hover {
+      color: #a00;
+      border-color: #a00; }
+  .btn-quantity {
+    background: var(--accent);
+    color: #fff; }
 
 /* Landscape phones and down */
 /* Landscape phone to portrait tablet */
@@ -61,8 +87,35 @@ a {
   color: var(--text);
   text-decoration: none; }
 
-strong {
-  color: var(--accent); }
+figure {
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.4rem;
+  display: flex;
+  overflow: hidden; }
+  figure .article-img {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    figure .article-img img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover; }
+  figure figcaption {
+    display: flex;
+    flex-direction: column; }
+
+input {
+  /* Firefox */
+  -moz-appearance: textfield;
+  /* Chrome */
+  /* Opéra*/ }
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+  input::-o-inner-spin-button {
+    -o-appearance: none;
+    margin: 0; }
 
 .gallery-container {
   height: 100%;
@@ -73,34 +126,90 @@ strong {
     height: 50rem;
     width: 60rem;
     margin: 3rem; }
-    .gallery-container section .gallery-item figure {
+    .gallery-container section .gallery-item.first-item {
+      margin-left: 6rem; }
+    .gallery-container section .gallery-item.last-item {
+      margin-right: 6rem; }
+    .gallery-container section .gallery-item a figure {
+      transition: all 0.5s ease;
       height: 100%;
-      background: #fff;
       padding: 1rem;
-      box-shadow: var(--box-shadow);
-      border-radius: 0.4rem;
-      display: flex;
       flex-direction: column; }
-      .gallery-container section .gallery-item figure .article-img {
-        flex: 4;
-        display: flex;
-        justify-content: center;
-        align-items: center; }
-        .gallery-container section .gallery-item figure .article-img img {
-          height: 100%;
-          width: 100%;
-          object-fit: cover; }
-      .gallery-container section .gallery-item figure figcaption {
-        flex: 1; }
-        .gallery-container section .gallery-item figure figcaption header {
+      .gallery-container section .gallery-item a figure:hover {
+        transform: translateY(-2rem) scale(1.02, 1.02);
+        box-shadow: 0 6px 8px rgba(60, 64, 67, 0.3), 0 6px 10px rgba(60, 64, 67, 0.15); }
+      .gallery-container section .gallery-item a figure .article-img {
+        flex: 4; }
+      .gallery-container section .gallery-item a figure figcaption {
+        flex: 1;
+        justify-content: space-between;
+        padding: 0 1rem 0 0.5rem; }
+        .gallery-container section .gallery-item a figure figcaption header {
+          margin-top: 1rem;
           display: flex;
           justify-content: space-between; }
-          .gallery-container section .gallery-item figure figcaption header p {
+          .gallery-container section .gallery-item a figure figcaption header p {
             font-size: 2.5rem;
             font-weight: 700; }
 
+#container main > figure {
+  height: 90%;
+  width: 90%;
+  max-width: 124rem; }
+  #container main > figure .article-img {
+    flex: 8;
+    padding: 1rem; }
+  #container main > figure figcaption {
+    flex: 3;
+    padding: 1rem 3rem 2rem 1rem; }
+    #container main > figure figcaption header {
+      margin-bottom: 5rem; }
+      #container main > figure figcaption header h2 {
+        color: var(--accent); }
+    #container main > figure figcaption form .group {
+      margin-bottom: 4rem;
+      display: flex;
+      flex-direction: column; }
+      #container main > figure figcaption form .group input,
+      #container main > figure figcaption form .group select {
+        padding: 0.5rem 1rem; }
+      #container main > figure figcaption form .group select {
+        text-align-last: center; }
+      #container main > figure figcaption form .group .label,
+      #container main > figure figcaption form .group label {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.2rem; }
+      #container main > figure figcaption form .group .row {
+        display: flex;
+        align-items: center; }
+        #container main > figure figcaption form .group .row input {
+          flex: 1;
+          margin: 0 0.5rem;
+          text-align: center; }
+        #container main > figure figcaption form .group .row button {
+          width: 3rem;
+          padding: 0;
+          align-self: stretch; }
+          #container main > figure figcaption form .group .row button i {
+            transform: translateY(1px); }
+    #container main > figure figcaption form .btn-container {
+      display: flex;
+      justify-content: space-evenly; }
+      #container main > figure figcaption form .btn-container i {
+        margin-right: 1rem; }
+    #container main > figure figcaption .article-description {
+      text-align: justify; }
+    #container main > figure figcaption .article-price {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
+      margin: 2rem 0; }
+
 #container {
   min-height: 100vh;
+  max-width: 1920px;
   display: grid;
   grid: "header" auto "main" 1fr "footer" auto / auto; }
   #container > header {

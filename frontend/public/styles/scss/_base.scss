@@ -44,6 +44,41 @@ a {
   text-decoration: none;
 }
 
-strong {
-  color: var(--accent);
+figure {
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.4rem;
+  display: flex;
+  overflow: hidden;
+  .article-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  figcaption {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+input {
+  /* Firefox */
+  -moz-appearance: textfield;
+
+  /* Chrome */
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Opéra*/
+  &::-o-inner-spin-button {
+    -o-appearance: none;
+    margin: 0;
+  }
 }

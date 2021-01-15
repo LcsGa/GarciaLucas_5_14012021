@@ -2,47 +2,54 @@ extends layout.pug
 
 block content
   main
-    .gallery
-      .gallery-container(data-scroll-container="")
-        section(data-scroll-section="")
-          .gallery-item
-            figure
-              .article-img
-                img(src="images/temporary/vcam_1.jpg", alt="")
-              figcaption
-                header
-                  h3.title TEST 1
-                  p 309.99€
-                p.article-id Réf. 123456789
-        section(data-scroll-section="")
-          .gallery-item
-            figure
-              .article-img
-                img(src="images/temporary/vcam_2.jpg", alt="")
-              figcaption
-                h3.title  TEST 2 - 309.99€
-                p.article-id Réf. 987654321
-        section(data-scroll-section="")
-          .gallery-item
-            figure
-              .article-img
-                img(src="images/temporary/vcam_3.jpg", alt="")
-              figcaption
-                h3.title  TEST 2 - 309.99€
-                p.article-id Réf. 987654321
-        section(data-scroll-section="")
-          .gallery-item
-            figure
-              .article-img
-                img(src="images/temporary/vcam_4.jpg", alt="")
-              figcaption
-                h3.title TEST 1 - 309.99€
-                p.article-id Réf. 123456789
-        section(data-scroll-section="")
-          .gallery-item
-            figure
-              .article-img
-                img(src="images/temporary/vcam_5.jpg", alt="")
-              figcaption
-                h3.title  TEST 2 - 309.99€
-                p.article-id Réf. 987654321
+    .gallery-container(data-scroll-container="")
+      section(data-scroll-section="")
+        .gallery-item.first-item
+          a(href="/article?id=123456789"): figure
+            .article-img
+              img(src="images/temporary/vcam_1.jpg", alt="Appareil photo")
+            figcaption
+              header
+                h3.title ZEISS IKON : Prontor
+                p 35.99 €
+              p.article-id Réf. 123456789
+      section(data-scroll-section="")
+        .gallery-item
+          a(href="#"): figure
+            .article-img
+              img(src="images/temporary/vcam_2.jpg", alt="Appareil photo")
+            figcaption
+              header
+                h3.title OLYMPUS : OM-2
+                p 81.00 €
+              p.article-id Réf. 987654321
+      section(data-scroll-section="")
+        .gallery-item
+          a(href="#"): figure
+            .article-img
+              img(src="images/temporary/vcam_3.jpg", alt="Appareil photo")
+            figcaption
+              header
+                h3.title ERNEMANN : Bob III
+                p 289.90 €
+              p.article-id Réf. 987654321
+      section(data-scroll-section="")
+        .gallery-item
+          a(href="#"): figure
+            .article-img
+              img(src="images/temporary/vcam_4.jpg", alt="Appareil photo")
+            figcaption
+              header
+                h3.title MINOLTA : XG-9
+                p 84.90 €
+              p.article-id Réf. 123456789
+      section(data-scroll-section="")
+        .gallery-item.last-item
+          a(href="#"): figure
+            .article-img
+              img(src="images/temporary/vcam_5.jpg", alt="Appareil photo")
+            figcaption
+              header
+                h3.title PENTAX : K1000
+                p 156.69 €
+              p.article-id Réf. 987654321

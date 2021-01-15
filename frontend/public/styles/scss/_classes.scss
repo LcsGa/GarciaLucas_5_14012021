@@ -2,3 +2,34 @@
   font-weight: 700;
   background: var(--primary);
 }
+
+.btn {
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  &-primary {
+    background: var(--primary);
+    color: #fff;
+    &:hover {
+      background: var(--dark);
+    }
+  }
+  &-danger {
+    background: #fff;
+    color: #d00;
+    border: 1px solid #d00;
+    &:hover {
+      color: #a00;
+      border-color: #a00;
+    }
+  }
+  &-quantity {
+    background: var(--accent);
+    color: #fff;
+  }
+}

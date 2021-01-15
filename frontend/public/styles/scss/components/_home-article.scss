@@ -1,0 +1,49 @@
+.gallery-container {
+  height: 100%;
+  min-width: 100vw;
+  display: flex;
+  align-items: center;
+  section {
+    .gallery-item {
+      height: 50rem;
+      width: 60rem;
+      margin: 3rem;
+      &.first-item {
+        margin-left: 6rem;
+      }
+      &.last-item {
+        margin-right: 6rem;
+      }
+      a {
+        figure {
+          transition: all 0.5s ease;
+          &:hover {
+            transform: translateY(-2rem) scale(1.02, 1.02);
+            box-shadow: 0 6px 8px rgba(60, 64, 67, 0.3),
+              0 6px 10px rgba(60, 64, 67, 0.15);
+          }
+          height: 100%;
+          padding: 1rem;
+          flex-direction: column;
+          .article-img {
+            flex: 4;
+          }
+          figcaption {
+            flex: 1;
+            justify-content: space-between;
+            padding: 0 1rem 0 0.5rem;
+            header {
+              margin-top: 1rem;
+              display: flex;
+              justify-content: space-between;
+              p {
+                font-size: 2.5rem;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
