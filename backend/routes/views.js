@@ -4,6 +4,10 @@ router.get("/", (req, res) => {
   res.render("home", { path: req.path });
 });
 
+router.get("/contact", (req, res) => {
+  res.render("contact", { path: req.path });
+});
+
 router.get("/cart", (req, res) => {
   res.render("cart", { path: req.path });
 });

@@ -1,16 +1,16 @@
 header
   .logo
     a(href="/")
-      h1 
-        //- i.fas.fa-shopping-cart
+      h1
         i.fad.fa-shopping-cart
         |Orinoco
   nav
     ul.menu
       li(class=["menu-item", path === "/" ? "active" : ""])
         a(href="/") Accueil
+      li(class=["menu-item", path === "/contact" ? "active" : ""])
+        a(href="/contact") Contactez-nous
       li(class=["menu-item", path === "/cart" ? "active" : ""])
         a(href="/cart") 
-          //- i.fas.fa-shopping-cart 
           i.far.fa-shopping-cart 
           span.article-nb 0
