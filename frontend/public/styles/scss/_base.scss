@@ -45,15 +45,11 @@ a {
 }
 
 figure {
-  background: #fff;
-  box-shadow: var(--box-shadow);
-  border-radius: 0.4rem;
+  @include box-model;
   display: flex;
   overflow: hidden;
   .article-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include centered;
     img {
       height: 100%;
       width: 100%;

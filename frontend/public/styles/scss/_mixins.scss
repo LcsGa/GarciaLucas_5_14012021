@@ -1,0 +1,11 @@
+@mixin centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin box-model {
+  background: #fff;
+  border-radius: 0.4rem;
+  box-shadow: var(--box-shadow);
+}

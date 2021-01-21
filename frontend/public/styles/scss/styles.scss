@@ -1,11 +1,13 @@
 @import "variables";
+@import "mixins";
 @import "reset";
 @import "classes";
 @import "media-queries";
 @import "utils";
 @import "base";
 @import "./components/home-article";
-@import "./components/cart-article";
+@import "./components/article";
+@import "./components/cart";
 
 #container {
   min-height: 100vh;
@@ -68,11 +70,9 @@
   }
 
   main {
+    @include centered;
     grid-area: main;
     background: var(--divider);
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   footer {
