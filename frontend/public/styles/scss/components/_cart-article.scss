@@ -1,0 +1,86 @@
+#container main > figure {
+  height: 90%;
+  width: 90%;
+  max-width: 124rem;
+
+  .article {
+    &-img {
+      flex: 8;
+      padding: 1rem;
+    }
+  }
+
+  figcaption {
+    flex: 3;
+    padding: 1rem 3rem 2rem 1rem;
+
+    header {
+      margin-bottom: 5rem;
+      h2 {
+        color: var(--accent);
+      }
+    }
+
+    form {
+      .group {
+        margin-bottom: 4rem;
+        display: flex;
+        flex-direction: column;
+
+        input,
+        select {
+          padding: 0.5rem 1rem;
+        }
+
+        select {
+          text-align-last: center;
+        }
+
+        .label,
+        label {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 0.2rem;
+        }
+
+        .row {
+          display: flex;
+          align-items: center;
+          input {
+            flex: 1;
+            margin: 0 0.5rem;
+            text-align: center;
+          }
+          button {
+            width: 3rem;
+            padding: 0;
+            align-self: stretch;
+            i {
+              transform: translateY(1px);
+            }
+          }
+        }
+      }
+      .btn-container {
+        display: flex;
+        justify-content: space-evenly;
+        i {
+          margin-right: 1rem;
+        }
+      }
+    }
+
+    .article {
+      &-description {
+        text-align: justify;
+      }
+      &-price {
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 3rem;
+        text-align: center;
+        margin: 2rem 0;
+      }
+    }
+  }
+}
