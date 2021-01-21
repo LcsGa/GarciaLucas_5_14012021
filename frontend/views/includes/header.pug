@@ -2,7 +2,8 @@ header
   .logo
     a(href="/")
       h1 
-        i.fas.fa-shopping-cart
+        //- i.fas.fa-shopping-cart
+        i.fad.fa-shopping-cart
         |Orinoco
   nav
     ul.menu
@@ -10,5 +11,6 @@ header
         a(href="/") Accueil
       li(class=["menu-item", path === "/cart" ? "active" : ""])
         a(href="/cart") 
-          i.fas.fa-shopping-cart 
+          //- i.fas.fa-shopping-cart 
+          i.far.fa-shopping-cart 
           span.article-nb 0
