@@ -5,7 +5,7 @@
 @import "media-queries";
 @import "utils";
 @import "base";
-@import "./components/home-article";
+@import "./components/home";
 @import "./components/article";
 @import "./components/cart";
 
@@ -73,6 +73,7 @@
     @include centered;
     grid-area: main;
     background: var(--divider);
+    overflow: hidden;
   }
 
   footer {

@@ -3,6 +3,10 @@
   background: var(--primary);
 }
 
+.hidden {
+  display: none !important;
+}
+
 .btn {
   border: none;
   font-size: 2rem;
@@ -11,7 +15,15 @@
   border-radius: 4px;
   cursor: pointer;
   outline: none;
+  white-space: nowrap;
   transition: all 0.5s ease-in-out;
+  &-container {
+    display: flex;
+    justify-content: space-evenly;
+    i {
+      margin-right: 1rem;
+    }
+  }
   &-primary {
     background: var(--primary);
     color: #fff;
@@ -21,15 +33,46 @@
   }
   &-danger {
     background: #fff;
-    color: #d00;
-    border: 1px solid #d00;
+    color: var(--error);
+    border: 1px solid var(--error);
     &:hover {
-      color: #a00;
-      border-color: #a00;
+      color: var(--error-dark);
+      border-color: var(--error-dark);
     }
   }
   &-quantity {
     background: var(--accent);
     color: #fff;
+  }
+  &-delete {
+    background: var(--error);
+    color: #fff;
+    padding: 0;
+    border-radius: 50%;
+    height: 7rem;
+    width: 7rem;
+    box-shadow: var(--box-shadow);
+    &:hover {
+      background: var(--error-dark);
+    }
+  }
+}
+
+.article {
+  .article {
+    &-img {
+      flex: 8;
+      padding: 1rem;
+    }
+    &-description {
+      text-align: justify;
+    }
+    &-price {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
   }
 }

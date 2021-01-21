@@ -2,9 +2,114 @@ extends layout.pug
 
 block content
   main
-    #empty-cart
+    #empty-cart.hidden
       span: i.far.fa-cart-arrow-down
-      .group
+      .group-text
         h2 Votre panier est vide
         p Il semblerait que vous n'ayez pas encore fait votre choix...
       a.btn.btn-primary(href="/") Poursuivre vos achats
+    #cart-content
+      article
+        .cart-item
+          figure
+            .article-img
+              img(src="images/temporary/vcam_1.jpg", alt="Appareil photo")
+            button.btn.btn-delete: i.fas.fa-trash-alt
+            figcaption
+              header
+                h2.article-name ZEISS IKON : Prontor
+                p.article-id Réf. #{123456789}
+              form
+                .group
+                  label(for="option") Option
+                  select#option
+                    option(value="Option 1") Option 1 
+                    option(value="Option 2") Option 2
+                    option(value="Option 3") Option 3
+                    option(value="Option 4") Option 4
+                .group
+                  label(for="quantity") Quantité
+                  .row
+                    button.btn.btn-quantity.quantity-remove(type="button"): i.fas.fa-minus
+                    input#quantity(type="number" min="1" max="99" value="1")
+                    button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
+                .group
+                  p.article-price 35.99 €
+        .cart-item
+          figure
+            .article-img
+              img(src="images/temporary/vcam_1.jpg", alt="Appareil photo")
+            button.btn.btn-delete: i.fas.fa-trash-alt
+            figcaption
+              header
+                h2.article-name ZEISS IKON : Prontor
+                p.article-id Réf. #{123456789}
+              form
+                .group
+                  label(for="option") Option
+                  select#option
+                    option(value="Option 1") Option 1 
+                    option(value="Option 2") Option 2
+                    option(value="Option 3") Option 3
+                    option(value="Option 4") Option 4
+                .group
+                  label(for="quantity") Quantité
+                  .row
+                    button.btn.btn-quantity.quantity-remove(type="button"): i.fas.fa-minus
+                    input#quantity(type="number" min="1" max="99" value="1")
+                    button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
+                .group
+                  p.article-price 35.99 €
+        .cart-item
+          figure
+            .article-img
+              img(src="images/temporary/vcam_1.jpg", alt="Appareil photo")
+            button.btn.btn-delete: i.fas.fa-trash-alt
+            figcaption
+              header
+                h2.article-name ZEISS IKON : Prontor
+                p.article-id Réf. #{123456789}
+              form
+                .group
+                  label(for="option") Option
+                  select#option
+                    option(value="Option 1") Option 1 
+                    option(value="Option 2") Option 2
+                    option(value="Option 3") Option 3
+                    option(value="Option 4") Option 4
+                .group
+                  label(for="quantity") Quantité
+                  .row
+                    button.btn.btn-quantity.quantity-remove(type="button"): i.fas.fa-minus
+                    input#quantity(type="number" min="1" max="99" value="1")
+                    button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
+                .group
+                  p.article-price 35.99 €
+        .cart-item
+          figure
+            .article-img
+              img(src="images/temporary/vcam_1.jpg", alt="Appareil photo")
+            button.btn.btn-delete: i.fas.fa-trash-alt
+            figcaption
+              header
+                h2.article-name ZEISS IKON : Prontor
+                p.article-id Réf. #{123456789}
+              form
+                .group
+                  label(for="option") Option
+                  select#option
+                    option(value="Option 1") Option 1 
+                    option(value="Option 2") Option 2
+                    option(value="Option 3") Option 3
+                    option(value="Option 4") Option 4
+                .group
+                  label(for="quantity") Quantité
+                  .row
+                    button.btn.btn-quantity.quantity-remove(type="button"): i.fas.fa-minus
+                    input#quantity(type="number" min="1" max="99" value="1")
+                    button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
+                .group
+                  p.article-price 35.99 €
+      aside
+        h1 Récapitulatif de la commande
+        

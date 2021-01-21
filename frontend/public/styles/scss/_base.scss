@@ -1,5 +1,6 @@
 :root {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -44,16 +45,28 @@ a {
   text-decoration: none;
 }
 
+.article-id {
+  color: var(--hint);
+}
+
 figure {
   @include box-model;
   display: flex;
   overflow: hidden;
-  .article-img {
-    @include centered;
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
+  .article {
+    &-img {
+      @include centered;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    &-price {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
     }
   }
   figcaption {
@@ -76,5 +89,49 @@ input {
   &::-o-inner-spin-button {
     -o-appearance: none;
     margin: 0;
+  }
+}
+
+form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .group {
+    display: flex;
+    flex-direction: column;
+    input,
+    select {
+      padding: 0.6rem 1rem;
+      background: #fff;
+      border: 0.1rem solid var(--hint);
+      border-radius: 0.4rem;
+    }
+    select {
+      text-align-last: center;
+    }
+    .label,
+    label {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      input {
+        flex: 1;
+        margin: 0 0.5rem;
+        text-align: center;
+      }
+      button {
+        width: 3rem;
+        padding: 0;
+        align-self: stretch;
+        i {
+          transform: translateY(1px);
+        }
+      }
+    }
   }
 }

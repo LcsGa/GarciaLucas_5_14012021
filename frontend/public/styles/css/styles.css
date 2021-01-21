@@ -7,6 +7,7 @@
   --divider: #ecf0f1;
   --dark-grey: #324355;
   --error: #e74c3c;
+  --error-dark: #c0392b;
   --hint: #95a5a6;
   --font-family: "Mulish", cursive;
   --special-font: "Permanent Marker", cursive;
@@ -22,6 +23,9 @@
   font-weight: 700;
   background: var(--primary); }
 
+.hidden {
+  display: none !important; }
+
 .btn {
   border: none;
   font-size: 2rem;
@@ -30,7 +34,13 @@
   border-radius: 4px;
   cursor: pointer;
   outline: none;
+  white-space: nowrap;
   transition: all 0.5s ease-in-out; }
+  .btn-container {
+    display: flex;
+    justify-content: space-evenly; }
+    .btn-container i {
+      margin-right: 1rem; }
   .btn-primary {
     background: var(--primary);
     color: #fff; }
@@ -38,21 +48,46 @@
       background: var(--dark); }
   .btn-danger {
     background: #fff;
-    color: #d00;
-    border: 1px solid #d00; }
+    color: var(--error);
+    border: 1px solid var(--error); }
     .btn-danger:hover {
-      color: #a00;
-      border-color: #a00; }
+      color: var(--error-dark);
+      border-color: var(--error-dark); }
   .btn-quantity {
     background: var(--accent);
     color: #fff; }
+  .btn-delete {
+    background: var(--error);
+    color: #fff;
+    padding: 0;
+    border-radius: 50%;
+    height: 7rem;
+    width: 7rem;
+    box-shadow: var(--box-shadow); }
+    .btn-delete:hover {
+      background: var(--error-dark); }
+
+.article .article-img {
+  flex: 8;
+  padding: 1rem; }
+
+.article .article-description {
+  text-align: justify; }
+
+.article .article-price {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 3rem;
+  text-align: center;
+  margin: 2rem 0; }
 
 /* Landscape phones and down */
 /* Landscape phone to portrait tablet */
 /* Portrait tablet to landscape and desktop */
 /* Large desktop */
 :root {
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  scroll-behavior: smooth; }
 
 body {
   font-size: 1.6rem;
@@ -87,6 +122,9 @@ a {
   color: var(--text);
   text-decoration: none; }
 
+.article-id {
+  color: var(--hint); }
+
 figure {
   background: #fff;
   border-radius: 0.4rem;
@@ -101,6 +139,11 @@ figure {
       height: 100%;
       width: 100%;
       object-fit: cover; }
+  figure .article-price {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 3rem;
+    text-align: center; }
   figure figcaption {
     display: flex;
     flex-direction: column; }
@@ -116,6 +159,41 @@ input {
   input::-o-inner-spin-button {
     -o-appearance: none;
     margin: 0; }
+
+form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  form .group {
+    display: flex;
+    flex-direction: column; }
+    form .group input,
+    form .group select {
+      padding: 0.6rem 1rem;
+      background: #fff;
+      border: 0.1rem solid var(--hint);
+      border-radius: 0.4rem; }
+    form .group select {
+      text-align-last: center; }
+    form .group .label,
+    form .group label {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem; }
+    form .group .row {
+      display: flex;
+      align-items: center; }
+      form .group .row input {
+        flex: 1;
+        margin: 0 0.5rem;
+        text-align: center; }
+      form .group .row button {
+        width: 3rem;
+        padding: 0;
+        align-self: stretch; }
+        form .group .row button i {
+          transform: translateY(1px); }
 
 .gallery-container {
   height: 100%;
@@ -152,67 +230,31 @@ input {
             font-size: 2.5rem;
             font-weight: 700; }
 
-#container main > figure {
+#container main > figure.article {
   height: 90%;
   width: 90%;
   max-width: 124rem; }
-  #container main > figure .article-img {
+  #container main > figure.article .article-img {
     flex: 8;
     padding: 1rem; }
-  #container main > figure figcaption {
+  #container main > figure.article .article-description {
+    text-align: justify; }
+  #container main > figure.article .article-price {
+    margin: 2rem 0; }
+  #container main > figure.article figcaption {
     flex: 3;
     padding: 1rem 3rem 2rem 1rem; }
-    #container main > figure figcaption header {
+    #container main > figure.article figcaption header {
       margin-bottom: 5rem; }
-      #container main > figure figcaption header h2 {
+      #container main > figure.article figcaption header h2 {
         color: var(--accent); }
-    #container main > figure figcaption form .group {
-      margin-bottom: 4rem;
-      display: flex;
-      flex-direction: column; }
-      #container main > figure figcaption form .group input,
-      #container main > figure figcaption form .group select {
-        padding: 0.5rem 1rem; }
-      #container main > figure figcaption form .group select {
-        text-align-last: center; }
-      #container main > figure figcaption form .group .label,
-      #container main > figure figcaption form .group label {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 0.2rem; }
-      #container main > figure figcaption form .group .row {
-        display: flex;
-        align-items: center; }
-        #container main > figure figcaption form .group .row input {
-          flex: 1;
-          margin: 0 0.5rem;
-          text-align: center; }
-        #container main > figure figcaption form .group .row button {
-          width: 3rem;
-          padding: 0;
-          align-self: stretch; }
-          #container main > figure figcaption form .group .row button i {
-            transform: translateY(1px); }
-    #container main > figure figcaption form .btn-container {
-      display: flex;
-      justify-content: space-evenly; }
-      #container main > figure figcaption form .btn-container i {
-        margin-right: 1rem; }
-    #container main > figure figcaption .article-description {
-      text-align: justify; }
-    #container main > figure figcaption .article-price {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 3rem;
-      text-align: center;
-      margin: 2rem 0; }
 
 #empty-cart {
   background: #fff;
   border-radius: 0.4rem;
   box-shadow: var(--box-shadow);
   height: 60%;
-  width: 60%;
+  width: 100%;
   max-width: 80rem;
   padding: 2rem 3rem;
   display: flex;
@@ -228,16 +270,66 @@ input {
     transform: translateX(-2vh); }
     #empty-cart span i {
       font-size: 20vh; }
-  #empty-cart .group {
+  #empty-cart .group-text {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column; }
-    #empty-cart .group h2 {
+    #empty-cart .group-text h2 {
       color: var(--accent);
       margin-bottom: 0; }
-    #empty-cart .group p {
+    #empty-cart .group-text p {
       text-align: center; }
+
+#cart-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center; }
+  #cart-content article {
+    flex: 3;
+    max-height: 100%;
+    padding: 2rem 0;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -ms-overflow-style: none;
+    scrollbar-width: none; }
+    #cart-content article::-webkit-scrollbar {
+      display: none; }
+    #cart-content article .cart-item {
+      width: 100%;
+      max-width: 80rem;
+      position: relative;
+      transform: translateX(-1.875rem); }
+      #cart-content article .cart-item .btn-delete {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(50%, -50%); }
+      #cart-content article .cart-item figure {
+        margin: 2rem 0;
+        height: 30rem; }
+        #cart-content article .cart-item figure .article-img {
+          width: 30rem; }
+        #cart-content article .cart-item figure .article-price {
+          color: var(--accent);
+          font-weight: 700;
+          font-size: 3rem;
+          text-align: center; }
+        #cart-content article .cart-item figure figcaption {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 2rem 8rem 2rem 3rem; }
+          #cart-content article .cart-item figure figcaption header {
+            margin-bottom: 2rem; }
+            #cart-content article .cart-item figure figcaption header h2 {
+              margin: 0; }
+  #cart-content aside {
+    flex: 1; }
 
 #container {
   min-height: 100vh;
@@ -287,7 +379,8 @@ input {
     justify-content: center;
     align-items: center;
     grid-area: main;
-    background: var(--divider); }
+    background: var(--divider);
+    overflow: hidden; }
   #container footer {
     width: 100vw;
     grid-area: footer;
