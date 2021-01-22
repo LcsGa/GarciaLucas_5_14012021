@@ -92,6 +92,23 @@ input {
   }
 }
 
+input,
+select,
+textarea {
+  padding: 0.6rem 1rem;
+  background: #fff;
+  border: 0.1rem solid var(--hint);
+  border-radius: 0.4rem;
+}
+
+select {
+  text-align-last: center;
+}
+
+textarea {
+  resize: none;
+}
+
 form {
   flex: 1;
   display: flex;
@@ -100,16 +117,7 @@ form {
   .group {
     display: flex;
     flex-direction: column;
-    input,
-    select {
-      padding: 0.6rem 1rem;
-      background: #fff;
-      border: 0.1rem solid var(--hint);
-      border-radius: 0.4rem;
-    }
-    select {
-      text-align-last: center;
-    }
+
     .label,
     label {
       font-size: 2rem;
