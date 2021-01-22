@@ -33,6 +33,11 @@
 .hidden {
   display: none !important; }
 
+.error {
+  color: var(--error); }
+  .error-input {
+    border-color: var(--error); }
+
 .btn {
   border: none;
   font-size: 2rem;
@@ -370,10 +375,15 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly; }
-    #contact-form .content .group:last-child {
-      height: 35%; }
-      #contact-form .content .group:last-child textarea {
-        height: 100%; }
+    #contact-form .content .group {
+      position: relative; }
+      #contact-form .content .group:last-child {
+        height: 35%; }
+        #contact-form .content .group:last-child textarea {
+          height: 100%; }
+      #contact-form .content .group small {
+        position: absolute;
+        bottom: -1.6rem; }
 
 #container {
   min-height: 100vh;

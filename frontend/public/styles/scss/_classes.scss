@@ -7,6 +7,13 @@
   display: none !important;
 }
 
+.error {
+  color: var(--error);
+  &-input {
+    border-color: var(--error);
+  }
+}
+
 .btn {
   border: none;
   font-size: 2rem;

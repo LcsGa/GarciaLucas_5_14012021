@@ -8,12 +8,15 @@ block content
         .group
           label(for="firstname") Prénom
           input#firstname(type="text", name="firstname")
+          small.error-firstname.hidden *Le prénom que vous avez renseigné n'est pas valide
         .group
           label(for="lastname") Nom
           input#lastname(type="text", name="lastname")
+          small.error-lastname.hidden *Le nom que vous avez renseigné n'est pas valide
         .group
           label(for="email") Adresse email
           input#email(type="email", name="email")
+          small.error-email.hidden *L'adresse email que vous avez renseignée n'est pas valide
         .group
           label(for="message") Votre message
           textarea#message(name="message")
