@@ -11,11 +11,12 @@ html(lang="fr")
     link(rel="stylesheet", type="text/css", href="styles/css/locomotive-scroll.css")
     link(rel="shortcut icon", type="image" href="images/favicon.ico")
     title Orinoco
-  body
+  body.preload
     #container
       include includes/header.pug
       block content
       include includes/footer.pug
+    script(src="javascript/preload.js")
     if (path === "/")
       script(src="javascript/home.js", type="module")
     else if (path === "/article")
