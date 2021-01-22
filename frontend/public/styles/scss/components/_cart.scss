@@ -39,11 +39,10 @@
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: space-evenly;
   article {
-    flex: 3;
     max-height: 100%;
-    padding: 2rem 0;
+    padding: 2rem 5rem;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -96,6 +95,40 @@
     }
   }
   aside {
-    flex: 1;
+    @include centered;
+    height: 100%;
+    #purchase-summary {
+      @include box-model;
+      padding: 3rem 4rem;
+      .divider {
+        height: 2px;
+        width: 100%;
+        background-color: var(--divider);
+        margin-bottom: 2rem;
+      }
+      h2 {
+        color: var(--accent);
+        text-transform: uppercase;
+      }
+      button {
+        @include centered;
+        width: 100%;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+        i {
+          margin: 0 1rem 0.3rem -1rem;
+        }
+      }
+      .informations {
+        small {
+          display: block;
+          color: var(--hint);
+          line-height: 2rem;
+          i {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
   }
 }

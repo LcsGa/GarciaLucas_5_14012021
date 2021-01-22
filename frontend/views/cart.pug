@@ -111,5 +111,27 @@ block content
                 .group
                   p.article-price 35.99 €
       aside
-        h1 Récapitulatif de la commande
-        
+        #purchase-summary
+          h2 Récapitulatif
+          .group
+            h3 Total TTC
+            p#total-price
+          .divider
+          .group
+            h3 Ou payez en 3x
+            p.threefold-price
+          .divider
+          .group
+            button.btn.btn-primary
+              i.fad.fa-bags-shopping
+              |Acheter
+            .informations
+              small
+                i.fas.fa-sync-alt
+                |14 jours pour changer d'avis
+              small
+                i.fas.fa-hand-holding-usd
+                |Prix suivant TVA à 20%
+              small
+                i.fas.fa-shield-check
+                |Paiement sécurisé

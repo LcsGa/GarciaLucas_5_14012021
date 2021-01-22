@@ -303,11 +303,10 @@ form {
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: center; }
+  justify-content: space-evenly; }
   #cart-content article {
-    flex: 3;
     max-height: 100%;
-    padding: 2rem 0;
+    padding: 2rem 5rem;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -347,7 +346,38 @@ form {
             #cart-content article .cart-item figure figcaption header h2 {
               margin: 0; }
   #cart-content aside {
-    flex: 1; }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; }
+    #cart-content aside #purchase-summary {
+      background: #fff;
+      border-radius: 0.4rem;
+      box-shadow: var(--box-shadow);
+      padding: 3rem 4rem; }
+      #cart-content aside #purchase-summary .divider {
+        height: 2px;
+        width: 100%;
+        background-color: var(--divider);
+        margin-bottom: 2rem; }
+      #cart-content aside #purchase-summary h2 {
+        color: var(--accent);
+        text-transform: uppercase; }
+      #cart-content aside #purchase-summary button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 0;
+        margin-bottom: 1rem; }
+        #cart-content aside #purchase-summary button i {
+          margin: 0 1rem 0.3rem -1rem; }
+      #cart-content aside #purchase-summary .informations small {
+        display: block;
+        color: var(--hint);
+        line-height: 2rem; }
+        #cart-content aside #purchase-summary .informations small i {
+          margin-right: 0.5rem; }
 
 #contact-form {
   background: #fff;
