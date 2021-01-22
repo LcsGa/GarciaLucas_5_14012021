@@ -6,22 +6,22 @@ block content
       h2 Contactez-nous !
       .content
         .group
-          label(for="firstname") Prénom
-          input#firstname(type="text", name="firstname")
-          small.error-firstname.hidden *Le prénom que vous avez renseigné n'est pas valide
-        .group
           label(for="lastname") Nom
-          input#lastname(type="text", name="lastname")
+          input.field#lastname(type="text", name="lastname")
           small.error-lastname.hidden *Le nom que vous avez renseigné n'est pas valide
         .group
+          label(for="firstname") Prénom
+          input.field#firstname(type="text", name="firstname")
+          small.error-firstname.hidden *Le prénom que vous avez renseigné n'est pas valide
+        .group
           label(for="email") Adresse email
-          input#email(type="email", name="email")
+          input.field#email(type="email", name="email")
           small.error-email.hidden *L'adresse email que vous avez renseignée n'est pas valide
         .group
           label(for="message") Votre message
-          textarea#message(name="message")
+          textarea.field#message(name="message")
+          small.error-message.hidden *Votre message n'est pas valide
       .btn-container
         button.btn.btn-primary
           i.fas.fa-paper-plane
-          |Envoyer 
-        button.btn.btn-danger(type="button") Annuler
+          |Envoyer

@@ -384,6 +384,8 @@ form {
       #contact-form .content .group small {
         position: absolute;
         bottom: -1.6rem; }
+  #contact-form .btn {
+    padding: 1rem 2rem 1rem 1.5rem; }
 
 #container {
   min-height: 100vh;
