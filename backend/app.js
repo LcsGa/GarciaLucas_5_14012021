@@ -38,6 +38,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/images", express.static(path.join(__dirname, "images")));
+
 // Accessing to every files within the public folder
 app.use(express.static(path.join(__dirname, "../frontend/public/")));
 
