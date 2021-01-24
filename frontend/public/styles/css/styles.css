@@ -90,8 +90,7 @@
   color: var(--accent);
   font-weight: 700;
   font-size: 3rem;
-  text-align: center;
-  margin: 2rem 0; }
+  text-align: center; }
 
 /* Landscape phones and down */
 /* Landscape phone to portrait tablet */
@@ -250,7 +249,9 @@ form {
 
 #container main > figure.article {
   height: 90%;
+  min-height: 70rem;
   width: 90%;
+  min-width: 100rem;
   max-width: 124rem; }
   #container main > figure.article .article-img {
     flex: 8;
@@ -258,12 +259,12 @@ form {
   #container main > figure.article .article-description {
     text-align: justify; }
   #container main > figure.article .article-price {
-    margin: 2rem 0; }
+    margin-top: -5rem; }
   #container main > figure.article figcaption {
     flex: 3;
     padding: 1rem 3rem 2rem 1rem; }
     #container main > figure.article figcaption header {
-      margin-bottom: 5rem; }
+      margin-bottom: 10rem; }
       #container main > figure.article figcaption header h2 {
         color: var(--accent); }
 
