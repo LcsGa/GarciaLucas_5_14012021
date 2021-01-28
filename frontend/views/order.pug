@@ -15,18 +15,18 @@ block content
           input.field#firstname(type="text", name="firstname", required="true")
           small.error-firstname.hidden *Le prénom que vous avez renseigné n'est pas valide
         .group
-          label(for="email", title="<N°> + <Nom de la rue>") Adresse email
+          label(for="email") Adresse email
           input.field#email(type="email", name="email", required="true")
           small.error-email.hidden *L'adresse email que vous avez renseignée n'est pas valide
         .group
           label(for="address") 
             |Adresse postale
-            i.far.fa-question-circle
-          input.field#address(type="address", name="address", required="true")
+            i.far.fa-question-circle(title="Exemple : 2 rue de la République")
+          input.field#address(type="text", name="address", required="true")
           small.error-address.hidden *L'adresse postale que vous avez renseignée n'est pas valide
         .group
           label(for="city") Ville
-          input.field#city(type="city", name="city", required="true")
+          input.field#city(type="text", name="city", required="true")
           small.error-city.hidden *La ville que vous avez renseignée n'est pas valide
       .btn-container
         button.btn.btn-primary
