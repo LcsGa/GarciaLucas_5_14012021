@@ -110,7 +110,7 @@
         color: var(--accent);
         text-transform: uppercase;
       }
-      button {
+      a {
         @include centered;
         width: 100%;
         padding: 1rem 0;

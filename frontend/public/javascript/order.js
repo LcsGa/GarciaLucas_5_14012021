@@ -1,7 +1,6 @@
 const fields = document.querySelectorAll(".field");
-const [firstName, lastName, email, message] = fields;
+const [lastName, firstName, email, address, city] = fields;
 const errors = document.querySelectorAll("small");
-const sendBtn = document.querySelector("button");
 
 const getError = (fieldName) => {
   return [...errors].filter((err) =>
@@ -23,25 +22,20 @@ const verifyInput = (element, regex) => {
   }
 };
 
-[firstName, lastName].forEach((elem) =>
+[lastName, firstName].forEach((elem) =>
   elem.addEventListener("change", function () {
-    verifyInput(this, /^\S[a-zÀ-ÿ ,.'-]+$/i);
+    verifyInput(this, /^\S+[a-zÀ-ÿ ,.'-]+$/);
   })
 );
 
 email.addEventListener("change", function () {
-  verifyInput(this, /^\S[a-zA-z0-9-\.]+@([a-zA-z-]+\.)+[a-zA-z-]{2,4}$/g);
+  verifyInput(this, /^\S+[a-z\d-\.]+@([a-z-]+\.)+[a-z-]{2,4}$/i);
 });
 
-message.addEventListener("change", function () {
-  verifyInput(this, /^\S.+/);
+address.addEventListener("change", function () {
+  verifyInput(this, /^\S+\d{1,4}((\s[a-z]+,?)|,)?((\s)([a-zÀ-ÿ'\s-]+)){2,}$/i);
 });
 
-// Cancel button
-sendBtn.addEventListener("click", (e) => {
-  [...fields].forEach((field) => field.dispatchEvent(new Event("change")));
-
-  if ([...errors].filter((error) => !error.classList.contains("hidden"))) {
-    e.preventDefault();
-  }
+city.addEventListener("change", function () {
+  verifyInput(this, /^\S+[a-zÀ-ÿ'-\s]+$/i);
 });

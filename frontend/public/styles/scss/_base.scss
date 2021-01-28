@@ -75,6 +75,7 @@ figure {
   }
 }
 
+// Removes the increase and dicrease arrows on an input:number
 input {
   /* Firefox */
   -moz-appearance: textfield;
@@ -93,8 +94,7 @@ input {
 }
 
 input,
-select,
-textarea {
+select {
   padding: 0.6rem 1rem;
   background: #fff;
   border: 0.1rem solid var(--hint);
@@ -103,10 +103,6 @@ textarea {
 
 select {
   text-align-last: center;
-}
-
-textarea {
-  resize: none;
 }
 
 form {

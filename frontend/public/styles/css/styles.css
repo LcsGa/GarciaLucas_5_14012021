@@ -172,8 +172,7 @@ input {
     margin: 0; }
 
 input,
-select,
-textarea {
+select {
   padding: 0.6rem 1rem;
   background: #fff;
   border: 0.1rem solid var(--hint);
@@ -181,9 +180,6 @@ textarea {
 
 select {
   text-align-last: center; }
-
-textarea {
-  resize: none; }
 
 form {
   flex: 1;
@@ -360,19 +356,24 @@ form {
         height: 2px;
         width: 100%;
         background-color: var(--divider);
-        margin-bottom: 2rem; }
+        margin: 2rem 0; }
       #cart-content aside #purchase-summary h2 {
         color: var(--accent);
         text-transform: uppercase; }
-      #cart-content aside #purchase-summary button {
+      #cart-content aside #purchase-summary a {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         padding: 1rem 0;
         margin-bottom: 1rem; }
-        #cart-content aside #purchase-summary button i {
+        #cart-content aside #purchase-summary a i {
           margin: 0 1rem 0.3rem -1rem; }
+      #cart-content aside #purchase-summary p {
+        text-align: center;
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: var(--hint); }
       #cart-content aside #purchase-summary .informations small {
         display: block;
         color: var(--hint);
@@ -393,25 +394,29 @@ form {
     position: relative;
     display: flex;
     justify-content: center; }
-    #contact-form h2::after {
-      content: "";
-      position: absolute;
-      display: block;
-      height: 0.1rem;
-      width: 80%;
-      background: var(--primary);
-      bottom: -3rem; }
+  #contact-form .divider {
+    height: 2px;
+    width: 100%;
+    background-color: var(--divider);
+    margin: 1rem 0 0; }
   #contact-form .content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly; }
+    justify-content: space-evenly;
+    padding: 5rem 0; }
     #contact-form .content .group {
       position: relative; }
-      #contact-form .content .group:last-child {
-        height: 35%; }
-        #contact-form .content .group:last-child textarea {
-          height: 100%; }
+      #contact-form .content .group label {
+        position: relative; }
+        #contact-form .content .group label i {
+          font-size: 1.2rem;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-30%);
+          margin-left: 0.5rem;
+          color: var(--dark);
+          cursor: help; }
       #contact-form .content .group small {
         position: absolute;
         bottom: -1.6rem; }
