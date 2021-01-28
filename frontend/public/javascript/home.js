@@ -3,6 +3,13 @@ let articles;
 
 const displayArticles = () => {
   const articlesDOM = articles.map((article, index) => {
+    const price = {
+      integer: (article.price / 100).toFixed(0),
+      decimal: function () {
+        const decimal = article.price - this.integer * 100;
+        return decimal === 0 ? "00" : decimal;
+      },
+    };
     const articleDOM = document.createElement("section");
     articleDOM.setAttribute("data-scroll-section", "");
     articleDOM.innerHTML = `
@@ -21,7 +28,7 @@ const displayArticles = () => {
             <figcaption>
               <header>
                 <h3 class="name">${article.name}</h3>
-                <p>${(article.price / 100).toFixed(2)} €</p>
+                <p>${price.integer}€<sup>${price.decimal()}</sup></p>
               </header>
               <p class="article-id"> Réf. ${article._id}</p>
             </figcaption>

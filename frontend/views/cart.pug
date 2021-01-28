@@ -34,7 +34,8 @@ block content
                     input#quantity(type="number" min="1" max="99" value="1")
                     button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
                 .group
-                  p.article-price 35.99 €
+                  p.article-price 35€
+                    sup 99
         .cart-item
           figure
             .article-img
@@ -59,7 +60,8 @@ block content
                     input#quantity(type="number" min="1" max="99" value="1")
                     button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
                 .group
-                  p.article-price 35.99 €
+                  p.article-price 35€
+                    sup 99
         .cart-item
           figure
             .article-img
@@ -84,7 +86,8 @@ block content
                     input#quantity(type="number" min="1" max="99" value="1")
                     button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
                 .group
-                  p.article-price 35.99 €
+                  p.article-price 35€
+                    sup 99
         .cart-item
           figure
             .article-img
@@ -109,17 +112,22 @@ block content
                     input#quantity(type="number" min="1" max="99" value="1")
                     button.btn.btn-quantity.quantity-add(type="button"): i.fas.fa-plus
                 .group
-                  p.article-price 35.99 €
+                  p.article-price 35€
+                    sup 99
       aside
         #purchase-summary
           h2 Récapitulatif
           .group
             h3 Total TTC
-            p#total-price -.-- €
+            p#total-price 00€
+              sup 00
           .divider
           .group
-            h3 Ou payez en 3x
-            p.threefold-price 3&times-.-- €
+            h3 Ou payez en 3&times
+            p.threefold-price
+              |3&times
+              | 00€
+              sup 00
           .divider
           .group
             a.btn.btn-primary(href="/order")

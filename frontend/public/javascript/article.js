@@ -11,6 +11,13 @@ const options = () => {
 };
 
 const displayArticle = () => {
+  const price = {
+    integer: (article.price / 100).toFixed(0),
+    decimal: function () {
+      const decimal = article.price - this.integer * 100;
+      return decimal === 0 ? "00" : decimal;
+    },
+  };
   const articleDOM = document.createElement("figure");
   articleDOM.classList.add("article");
   articleDOM.innerHTML = `
@@ -46,7 +53,9 @@ const displayArticle = () => {
           </div>
         </div>
         <div class="group">
-          <p class="article-price">${(article.price / 100).toFixed(2)} €</p>
+          <p class="article-price">${
+            price.integer
+          }€<sup>${price.decimal()}</sup></p>
         </div>
         <div class="btn-container">
           <button class="btn btn-primary"><i class="fas fa-cart-plus"></i> Ajouter</button>
