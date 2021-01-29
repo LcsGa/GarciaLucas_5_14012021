@@ -28,7 +28,9 @@ block content
           label(for="city") Ville
           input.field#city(type="text", name="city", required="true")
           small.error-city.hidden *La ville que vous avez renseignée n'est pas valide
+      //- .divider
       .btn-container
         button.btn.btn-primary
           i.fad.fa-bags-shopping
           |Valider la commande
+        button.btn.btn-danger(type="button") Annuler

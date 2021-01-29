@@ -1,23 +1,19 @@
-const main = document.querySelector("main");
-const articleId = new URL(location.href).searchParams.get("id");
-let article;
-let price;
+import { fetchArticles } from "./fetchArticles.js";
 
-const options = () => {
+const main = document.querySelector("main");
+let quantityBtn, quantityDOM, lenseDOM, articlePriceDOM, formBtns;
+const articleId = new URL(location.href).searchParams.get("id");
+let article, price;
+
+const options = (article) => {
   const options = article.lenses;
   return options.map((lense) => {
     return `<option>${lense}</option>`;
   });
 };
 
-const displayArticle = () => {
-  const price = {
-    integer: (article.price / 100).toFixed(0),
-    decimal: function () {
-      const decimal = article.price - this.integer * 100;
-      return decimal === 0 ? "00" : decimal;
-    },
-  };
+const displayArticle = (articles, prices) => {
+  [article, price] = [...articles, ...prices];
   const articleDOM = document.createElement("figure");
   articleDOM.classList.add("article");
   articleDOM.innerHTML = `
@@ -36,9 +32,7 @@ const displayArticle = () => {
         </div>
         <div class="group">
           <label for="option">Option</label>
-          <select id="option">
-            ${options()}
-          </select>
+          <select id="lense">${options(article)}</select>
         </div>
         <div class="group">
           <label for="quantity">Quantité</label>
@@ -53,12 +47,12 @@ const displayArticle = () => {
           </div>
         </div>
         <div class="group">
-          <p class="article-price">${
-            price.integer
-          }€<sup>${price.decimal()}</sup></p>
+          <p class="article-price">${price.integer}€<sup>${
+    price.decimal
+  }</sup></p>
         </div>
         <div class="btn-container">
-          <button class="btn btn-primary"><i class="fas fa-cart-plus"></i> Ajouter</button>
+          <button class="btn btn-primary" type="button"><i class="fas fa-cart-plus"></i> Ajouter</button>
           <button class="btn btn-danger" type="button">Annuler</button>
         </div>
       </form>
@@ -67,75 +61,82 @@ const displayArticle = () => {
   main.appendChild(articleDOM);
 };
 
-const fetchArticle = async () => {
-  try {
-    const response = await fetch(`${location.origin}/api/cameras/${articleId}`);
-    article = await response.json();
-    price = article.price / 100;
-    displayArticle();
-    return new Promise((resolve) => {
-      resolve();
-    });
-  } catch (e) {
-    console.error(e);
-    return new Promise((resolve, reject) => {
-      reject(
-        "Une erreur est survenue : L'article séléctionné n'a pas correctement été récupéré.\n\nVérifier l'état de la requête dans la partie 'Network' de l'outil de développeur."
-      );
-    });
-  }
-};
-
 //_________________________________________________________________________________
-fetchArticle()
+fetchArticles(displayArticle, articleId)
   .then(() => {
-    const quantityBtn = document.querySelectorAll(".btn-quantity");
-    const quantity = document.querySelector("#quantity");
-    const articlePrice = document.querySelector(".article-price");
+    quantityBtn = document.querySelectorAll(".btn-quantity");
+    quantityDOM = document.querySelector("#quantity");
+    lenseDOM = document.querySelector("#lense");
+    articlePriceDOM = document.querySelector(".article-price");
+    formBtns = document.querySelectorAll(".btn-container button");
+    const [addToCartBtn, cancelBtn] = formBtns;
+
+    const modifyValue = (value) => {
+      if (
+        +quantityDOM.value < +quantityDOM.min ||
+        (+quantityDOM.value === +quantityDOM.min && value === +quantityDOM.min)
+      ) {
+        quantityDOM.value = quantityDOM.min;
+      } else if (
+        +quantityDOM.value > +quantityDOM.max ||
+        (+quantityDOM.value === +quantityDOM.max && value === +quantityDOM.max)
+      ) {
+        quantityDOM.value = quantityDOM.max;
+      } else if (value === +quantityDOM.min) {
+        +quantityDOM.value--;
+      } else {
+        +quantityDOM.value++;
+      }
+      quantityDOM.dispatchEvent(new Event("change"));
+    };
 
     const fixQuantity = () => {
-      if (+quantity.value < +quantity.min) {
-        quantity.value = quantity.min;
+      if (+quantityDOM.value < +quantityDOM.min) {
+        quantityDOM.value = quantityDOM.min;
       }
-      if (+quantity.value > +quantity.max) {
-        quantity.value = quantity.max;
+      if (+quantityDOM.value > +quantityDOM.max) {
+        quantityDOM.value = quantityDOM.max;
       }
     };
 
     const updatePrice = () => {
       fixQuantity();
-      articlePrice.innerHTML = (price * +quantity.value).toFixed(2) + " €";
+      price.double = (article.price / 100) * +quantityDOM.value;
+      articlePriceDOM.innerHTML = `${price.integer}€<sup>${price.decimal}</sup>`;
     };
 
-    const modifyValue = (value) => {
-      if (
-        +quantity.value < +quantity.min ||
-        (quantity.value === quantity.min && value === quantity.min)
-      ) {
-        quantity.value = quantity.min;
-      } else if (
-        +quantity.value > +quantity.max ||
-        (quantity.value === quantity.max && value === quantity.max)
-      ) {
-        quantity.value = quantity.max;
-      } else if (value === quantity.min) {
-        quantity.value--;
-      } else {
-        quantity.value++;
-      }
-      quantity.dispatchEvent(new Event("change"));
-    };
-
-    quantity.addEventListener("change", updatePrice);
+    quantityDOM.addEventListener("change", updatePrice);
 
     quantityBtn.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
+      btn.addEventListener("click", () => {
         if (btn.classList.contains("quantity-remove")) {
-          modifyValue(quantity.min);
+          modifyValue(+quantityDOM.min);
         } else {
-          modifyValue(quantity.max);
+          modifyValue(+quantityDOM.max);
         }
       });
     });
+
+    addToCartBtn.addEventListener("click", () => {
+      let item;
+      if (localStorage[article.name]) {
+        item = JSON.parse(localStorage[article.name]);
+        // TODO Ajouter nouvel item si lense différente ?
+        if (item.lense !== lenseDOM.value) item.lense = lenseDOM.value;
+        const newQuantity = item.quantity + +quantityDOM.value;
+        item.quantity =
+          newQuantity <= +quantityDOM.max ? newQuantity : +quantityDOM.max;
+      } else {
+        item = {
+          id: article._id,
+          lense: lenseDOM.value,
+          quantity: +quantityDOM.value,
+        };
+      }
+      localStorage.setItem(article.name, JSON.stringify(item));
+      console.log(JSON.parse(localStorage.getItem(article.name)));
+    });
+
+    cancelBtn.addEventListener("click", () => history.back());
   })
   .catch((e) => console.error(e));

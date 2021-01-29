@@ -1,6 +1,6 @@
 import "../lib/locomotive.min.js";
 
-setTimeout(() => {
+export const initLocomotiveScroll = () => {
   const scroll = new LocomotiveScroll({
     el: document.querySelector("[data-scroll-container]"),
     smooth: true,
@@ -8,4 +8,4 @@ setTimeout(() => {
   });
 
   document.querySelector(".c-scrollbar").remove();
-}, 100);
+};
