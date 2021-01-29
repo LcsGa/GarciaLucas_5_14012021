@@ -110,6 +110,9 @@
         color: var(--accent);
         text-transform: uppercase;
       }
+      h3 {
+        position: relative;
+      }
       a {
         @include centered;
         width: 100%;

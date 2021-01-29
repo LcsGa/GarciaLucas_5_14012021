@@ -139,3 +139,12 @@ form {
     }
   }
 }
+
+i.fa-question-circle {
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  margin-left: 0.25rem;
+  color: var(--dark);
+  cursor: help;
+}

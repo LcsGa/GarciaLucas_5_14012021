@@ -208,6 +208,14 @@ form {
         form .group .row button i {
           transform: translateY(1px); }
 
+i.fa-question-circle {
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  margin-left: 0.25rem;
+  color: var(--dark);
+  cursor: help; }
+
 .gallery-container {
   height: 100%;
   min-width: 100vw;
@@ -360,6 +368,8 @@ form {
       #cart-content aside #purchase-summary h2 {
         color: var(--accent);
         text-transform: uppercase; }
+      #cart-content aside #purchase-summary h3 {
+        position: relative; }
       #cart-content aside #purchase-summary a {
         display: flex;
         justify-content: center;
@@ -409,14 +419,6 @@ form {
       position: relative; }
       #contact-form .content .group label {
         position: relative; }
-        #contact-form .content .group label i {
-          font-size: 1.2rem;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-30%);
-          margin-left: 0.5rem;
-          color: var(--dark);
-          cursor: help; }
       #contact-form .content .group small {
         position: absolute;
         bottom: -1.6rem; }

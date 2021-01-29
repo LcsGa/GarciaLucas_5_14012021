@@ -119,6 +119,7 @@ fetchArticles(displayArticle, articleId)
 
     addToCartBtn.addEventListener("click", () => {
       let item;
+      // const itemName = `${article.name}-${lenseDOM.value}`;
       if (localStorage[article.name]) {
         item = JSON.parse(localStorage[article.name]);
         // TODO Ajouter nouvel item si lense différente ?
@@ -133,10 +134,23 @@ fetchArticles(displayArticle, articleId)
           quantity: +quantityDOM.value,
         };
       }
+      item.price = item.quantity * article.price;
       localStorage.setItem(article.name, JSON.stringify(item));
-      console.log(JSON.parse(localStorage.getItem(article.name)));
+      location.reload();
+      //TODO popup
+      const limitExceeded =
+        +quantityDOM.value + item.quantity > 10 ? true : false;
+      alert(
+        `Vous avez ajouté ${+quantityDOM.value} ${
+          +quantityDOM.value > 1 ? "articles" : "articles"
+        } avec l'option <${item.lense}>
+        
+          Vous en avez désormais ${item.quantity} dans votre panier !`
+      );
     });
 
     cancelBtn.addEventListener("click", () => history.back());
   })
-  .catch((e) => console.error(e));
+  .catch((e) => {
+    console.error(e);
+  });
