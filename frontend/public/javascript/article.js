@@ -31,7 +31,7 @@ const displayArticle = (articles, prices) => {
           <p class="article-description">${article.description}</p>
         </div>
         <div class="group">
-          <label for="option">Option</label>
+          <label>Option</label>
           <select id="lense">${options(article)}</select>
         </div>
         <div class="group">

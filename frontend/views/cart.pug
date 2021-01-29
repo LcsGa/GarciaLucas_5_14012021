@@ -2,13 +2,13 @@ extends layout.pug
 
 block content
   main
-    #empty-cart.hidden
+    #empty-cart
       span: i.far.fa-cart-arrow-down
       .group-text
         h2 Votre panier est vide
         p Il semblerait que vous n'ayez pas encore fait votre choix...
       a.btn.btn-primary(href="/") Poursuivre vos achats
-    #cart-content
+    #cart-content.hidden
       article
       aside
         #purchase-summary

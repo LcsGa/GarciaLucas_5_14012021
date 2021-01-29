@@ -449,7 +449,11 @@ i.fa-question-circle {
         #container > header .logo h1 i {
           margin-right: 1.5rem; }
     #container > header a {
-      color: #fff; }
+      color: #fff;
+      transition: all 0.4s ease; }
+      #container > header a:hover {
+        transition: all 0.4s ease;
+        background: var(--primary); }
     #container > header nav {
       height: 100%; }
       #container > header nav .menu {
