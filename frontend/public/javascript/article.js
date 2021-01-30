@@ -53,7 +53,7 @@ const displayArticle = (articles, prices) => {
         </div>
         <div class="btn-container">
           <button class="btn btn-primary" type="button"><i class="fas fa-cart-plus"></i> Ajouter</button>
-          <button class="btn btn-danger" type="button">Annuler</button>
+          <button class="btn btn-danger" type="button">Quitter</button>
         </div>
       </form>
     </figcaption>`;
@@ -118,23 +118,34 @@ fetchArticles(displayArticle, articleId)
     });
 
     addToCartBtn.addEventListener("click", () => {
+      //TODO refactor
       let item;
-      // const itemName = `${article.name}-${lenseDOM.value}`;
+      let variantIndex = 0;
       if (localStorage[article.name]) {
         item = JSON.parse(localStorage[article.name]);
-        // TODO Ajouter nouvel item si lense différente ?
-        if (item.lense !== lenseDOM.value) item.lense = lenseDOM.value;
-        const newQuantity = item.quantity + +quantityDOM.value;
-        item.quantity =
-          newQuantity <= +quantityDOM.max ? newQuantity : +quantityDOM.max;
+        variantIndex = item.variants.findIndex(
+          (variant) => variant.lense === lenseDOM.value
+        );
+        if (variantIndex === -1) {
+          item.variants.push({
+            lense: lenseDOM.value,
+            quantity: +quantityDOM.value,
+          });
+        } else {
+          const newQuantity =
+            item.variants[variantIndex].quantity + +quantityDOM.value;
+          item.variants[variantIndex].quantity =
+            newQuantity <= +quantityDOM.max ? newQuantity : +quantityDOM.max;
+        }
       } else {
         item = {
           id: article._id,
-          lense: lenseDOM.value,
-          quantity: +quantityDOM.value,
+          variants: [{ lense: lenseDOM.value, quantity: +quantityDOM.value }],
         };
       }
-      item.price = item.quantity * article.price;
+      if (variantIndex === -1) variantIndex = item.variants.length - 1;
+      item.variants[variantIndex].totalPrice =
+        item.variants[variantIndex].quantity * article.price;
       localStorage.setItem(article.name, JSON.stringify(item));
       location.reload();
       //TODO popup

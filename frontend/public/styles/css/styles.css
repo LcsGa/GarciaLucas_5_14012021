@@ -350,6 +350,8 @@ i.fa-question-circle {
             margin-bottom: 2rem; }
             #cart-content article .cart-item figure figcaption header h2 {
               margin: 0; }
+          #cart-content article .cart-item figure figcaption input {
+            text-align: center; }
   #cart-content aside {
     display: flex;
     justify-content: center;

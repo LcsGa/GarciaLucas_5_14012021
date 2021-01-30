@@ -1,4 +1,5 @@
 import { fetchArticles, price } from "./fetchArticles.js";
+import { itemVariants } from "./services.js";
 
 const articleDOM = document.querySelector("article");
 const totalPriceDOM = document.querySelector("#total-price");
@@ -16,52 +17,55 @@ const displayItems = (articles) => {
   displayCartContent();
   const article = articles[0];
   const item = JSON.parse(localStorage.getItem(article.name));
-  const itemDOM = document.createElement("div");
-  itemDOM.classList.add("cart-item");
-  itemDOM.innerHTML = `<figure data-name="${article.name}">
-    <div class="article-img">
-      <img src="${article.imageUrl}" alt="Appareil photo">
-    </div>
-    <button class="btn btn-delete" data-name="${article.name}">
-      <i class="fas fa-trash-alt"></i>
-    </button>
-    <figcaption>
-      <header>
-        <h2 class="article-name">${article.name}</h2>
-        <p class="article-id">Réf. ${article._id}</p>
-      </header>
-      <form>
-        <div class="group">
-          <label>Option</label>
-          <select>
-            <option>${item.lense}</option>
-          </select>
-        </div>
-        <div class="group">
-          <label for="quantity-${article._id}">Quantité</label>
-          <div class="row">
-            <button class="btn btn-quantity quantity-remove" type="button">
-              <i class="fas fa-minus"></i>
-            </button>
-            <input id="quantity-${
-              article._id
-            }" class="quantity" type="number" min="1" max="10" value="${
-    item.quantity
-  }">
-            <button class="btn btn-quantity quantity-add" type="button">
-              <i class="fas fa-plus"></i>
-            </button>
+  item.variants.forEach((variant) => {
+    const itemDOM = document.createElement("div");
+    itemDOM.classList.add("cart-item");
+    itemDOM.innerHTML = `<figure  data-name="${article.name}" 
+                                  data-lense="${variant.lense}">
+      <div class="article-img">
+        <img src="${article.imageUrl}" alt="Appareil photo">
+      </div>
+      <button class="btn btn-delete" 
+              data-name="${article.name}" 
+              data-lense="${variant.lense}">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+      <figcaption>
+        <header>
+          <h2 class="article-name">${article.name}</h2>
+          <p class="article-id">Réf. ${article._id}</p>
+        </header>
+        <form>
+          <div class="group">
+            <label>Option</label>
+            <input type="text" value="${variant.lense}" readonly/>
           </div>
-        </div>
-        <div class="group">
-          <p class="article-price">${price(item.price).integer}€<sup>${
-    price(item.price).decimal
-  }</sup></p>
-        </div>
-      </form>
-    </figcaption>
-  </figure>`;
-  articleDOM.insertAdjacentElement("afterbegin", itemDOM);
+          <div class="group">
+            <label for="quantity-${article._id}">Quantité</label>
+            <div class="row">
+              <button class="btn btn-quantity quantity-remove" type="button">
+                <i class="fas fa-minus"></i>
+              </button>
+              <input id="quantity-${
+                article._id
+              }" class="quantity" type="number" min="1" max="10" value="${
+      variant.quantity
+    }"/>
+              <button class="btn btn-quantity quantity-add" type="button">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="group">
+            <p class="article-price">${
+              price(variant.totalPrice).integer
+            }€<sup>${price(variant.totalPrice).decimal}</sup></p>
+          </div>
+        </form>
+      </figcaption>
+    </figure>`;
+    articleDOM.insertAdjacentElement("afterbegin", itemDOM);
+  });
 };
 
 items.forEach(async (item, i) => {
@@ -72,8 +76,8 @@ items.forEach(async (item, i) => {
         if (i === items.length - 1) {
           const deleteBtns = document.querySelectorAll(".btn-delete");
           const itemsDOM = document.querySelectorAll(".cart-item");
-          const totalPrice = items.reduce((acc, item) => {
-            acc += item.price;
+          const totalPrice = itemVariants.reduce((acc, item) => {
+            acc += item.totalPrice;
             return acc;
           }, 0);
           const threeTimesPrice = (1000 + totalPrice) / 3; // 1000 cents => 10 € administrative fees
@@ -86,13 +90,28 @@ items.forEach(async (item, i) => {
             price(threeTimesPrice).integer
           }€<sup>${price(threeTimesPrice).decimal}</sup>`;
 
+          const removeVariant = (articleName, variantToDelete) => {
+            const item = JSON.parse(localStorage.getItem(articleName));
+            localStorage.removeItem(articleName);
+            const variants = item.variants;
+            item.variants = [];
+            variants.forEach((variant) => {
+              if (variant.lense !== variantToDelete) {
+                item.variants.push(variant);
+              }
+            });
+            if (item.variants.length) {
+              localStorage.setItem(articleName, JSON.stringify(item));
+            }
+          };
+
           deleteBtns.forEach((btn) => {
             btn.addEventListener("click", () => {
               const confirmDeletion = confirm(
                 "Etes vous sûr de vouloir supprimer cet article ?"
               );
               if (confirmDeletion) {
-                localStorage.removeItem(btn.dataset.name);
+                removeVariant(btn.dataset.name, btn.dataset.lense);
                 location.reload();
               }
             });
