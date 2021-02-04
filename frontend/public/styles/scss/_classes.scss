@@ -65,7 +65,7 @@
   }
 }
 
-.article {
+figure.article {
   .article {
     &-img {
       flex: 8;
@@ -81,4 +81,19 @@
       text-align: center;
     }
   }
+}
+
+.title {
+  &-primary {
+    color: var(--primary);
+  }
+  &-accent {
+    color: var(--accent);
+  }
+}
+
+.divider {
+  height: 2px;
+  width: 100%;
+  background-color: var(--divider);
 }

@@ -2,8 +2,11 @@ import { fetchArticles } from "./shared/components/fetchArticles.js";
 import { formatPrice, updatePrice } from "./shared/utils/price.js";
 import { modifyQuantityHandler } from "./shared/utils/quantity.js";
 import { addToCart } from "./shared/components/addToCart.js";
+import { appendElement } from "./shared/components/dialog.js";
+import { updateArticleNb } from "./shared/components/preload.js";
 
 const main = document.querySelector("main");
+const dialogContainer = document.querySelector(".dialog-container");
 const articleId = new URL(location.href).searchParams.get("id");
 let article, price;
 
@@ -24,7 +27,7 @@ const displayArticle = (articles, prices) => {
     </div>
     <figcaption>
       <header>
-        <h2 class="article-name">${article.name}</h2>
+        <h2 class="article-name title-accent">${article.name}</h2>
         <p class="article-id">Réf. ${article._id}</p>
       </header>
       <form>
@@ -84,16 +87,19 @@ fetchArticles(displayArticle, articleId)
     addToCartBtn.addEventListener("click", () => {
       const quantity = +quantityDOM.value;
       const item = addToCart(article, lenseDOM.value, quantity, quantityDOM);
-      location.reload();
+      updateArticleNb();
+
+      dialogContainer.classList.remove("hidden");
+      appendElement(
+        { type: "h2", content: "Ajout effectué" },
+        `Vous avez ajouté <strong>${+quantityDOM.value} ${
+          +quantityDOM.value > 1 ? "articles" : "article"
+        }</strong> avec l'option "<strong>${lenseDOM.value}</strong>"`,
+        `Vous en avez désormais <strong>${item.quantity}</strong> dans votre panier !`
+      );
       //TODO popup
       // const limitExceeded =
       //   +quantityDOM.value + item.quantity > 10 ? true : false;
-      alert(
-        `Vous avez ajouté ${+quantityDOM.value} ${
-          +quantityDOM.value > 1 ? "articles" : "articles"
-        } avec la lentille "${lenseDOM.value}"
-        \nVous en avez désormais ${item.quantity} dans votre panier !`
-      );
     });
 
     cancelBtn.addEventListener("click", () => history.back());

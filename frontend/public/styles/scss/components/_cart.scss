@@ -14,17 +14,6 @@
       font-size: 20vh;
     }
   }
-  .group-text {
-    @include centered;
-    flex-direction: column;
-    h2 {
-      color: var(--accent);
-      margin-bottom: 0;
-    }
-    p {
-      text-align: center;
-    }
-  }
 }
 #cart-content {
   height: 100%;
@@ -95,13 +84,9 @@
       @include box-model;
       padding: 3rem 4rem;
       .divider {
-        height: 2px;
-        width: 100%;
-        background-color: var(--divider);
         margin: 2rem 0;
       }
       h2 {
-        color: var(--accent);
         text-transform: uppercase;
       }
       h3 {

@@ -8,3 +8,10 @@ block content
         h2 Oups !
         p Nous n'avons trouvé aucun article à afficher...
       a.btn.btn-primary(href="/") Revenir à l'accueil
+  include ./includes/dialog.pug
+    block btns
+      a.btn.btn-primary(href="/cart") Voir le panier
+      a.btn.btn-danger(href="") Retour
+      //- p Vous avez essayé d'ajouter x articles avec l'option "option". Cependant vous en aviez déjà y dans votre panier et vous ne pouvez ajouter que z articles maximum.
+      //- p Vous avez désormais z articles dans votre panier.
+      //- p Vous pouvez modifier cette quantité dans le panier directement.

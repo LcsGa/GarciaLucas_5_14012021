@@ -1,0 +1,20 @@
+.dialog {
+  &-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    @include centered;
+  }
+  &-box {
+    @include box-model;
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    .divider {
+      margin: 3rem 0;
+    }
+  }
+}

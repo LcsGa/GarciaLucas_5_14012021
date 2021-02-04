@@ -79,18 +79,29 @@
     .btn-delete:hover {
       background: var(--error-dark); }
 
-.article .article-img {
+figure.article .article-img {
   flex: 8;
   padding: 1rem; }
 
-.article .article-description {
+figure.article .article-description {
   text-align: justify; }
 
-.article .article-price {
+figure.article .article-price {
   color: var(--accent);
   font-weight: 700;
   font-size: 3rem;
   text-align: center; }
+
+.title-primary {
+  color: var(--primary); }
+
+.title-accent {
+  color: var(--accent); }
+
+.divider {
+  height: 2px;
+  width: 100%;
+  background-color: var(--divider); }
 
 /* Landscape phones and down */
 /* Landscape phone to portrait tablet */
@@ -272,8 +283,6 @@ i.fa-question-circle {
     padding: 1rem 3rem 2rem 1rem; }
     #container main figure.article figcaption header {
       margin-bottom: 10rem; }
-      #container main figure.article figcaption header h2 {
-        color: var(--accent); }
 
 .information-box {
   background: #fff;
@@ -293,7 +302,6 @@ i.fa-question-circle {
     align-items: center;
     flex-direction: column; }
     .information-box .group-text h2 {
-      color: var(--accent);
       margin-bottom: 0; }
     .information-box .group-text p {
       text-align: center; }
@@ -307,17 +315,6 @@ i.fa-question-circle {
   transform: translateX(-2vh); }
   #empty-cart span i {
     font-size: 20vh; }
-
-#empty-cart .group-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; }
-  #empty-cart .group-text h2 {
-    color: var(--accent);
-    margin-bottom: 0; }
-  #empty-cart .group-text p {
-    text-align: center; }
 
 #cart-content {
   height: 100%;
@@ -378,12 +375,8 @@ i.fa-question-circle {
       box-shadow: var(--box-shadow);
       padding: 3rem 4rem; }
       #cart-content aside #purchase-summary .divider {
-        height: 2px;
-        width: 100%;
-        background-color: var(--divider);
         margin: 2rem 0; }
       #cart-content aside #purchase-summary h2 {
-        color: var(--accent);
         text-transform: uppercase; }
       #cart-content aside #purchase-summary h3 {
         position: relative; }
@@ -416,15 +409,11 @@ i.fa-question-circle {
   height: 90%;
   max-width: 60rem; }
   #contact-form h2 {
-    color: var(--primary);
     text-align: center;
     position: relative;
     display: flex;
     justify-content: center; }
   #contact-form .divider {
-    height: 2px;
-    width: 100%;
-    background-color: var(--divider);
     margin: 1rem 0 0; }
   #contact-form .content {
     flex: 1;
@@ -455,6 +444,27 @@ i.fa-question-circle {
             margin-right: 1.5rem; }
           #contact-form .btn-container .order-container #order-summary p#total-price {
             transform: translateY(-0.2rem); }
+
+.dialog-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.dialog-box {
+  background: #fff;
+  border-radius: 0.4rem;
+  box-shadow: var(--box-shadow);
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column; }
+  .dialog-box .divider {
+    margin: 3rem 0; }
 
 #container {
   min-height: 100vh;
