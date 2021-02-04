@@ -1,4 +1,4 @@
-import { fetchArticles } from "./fetchArticles.js";
+import { fetchArticles } from "./shared/components/fetchArticles.js";
 import { initLocomotiveScroll } from "./assets/home-scroll.js";
 
 const galleryContainer = document.querySelector(".gallery-container");

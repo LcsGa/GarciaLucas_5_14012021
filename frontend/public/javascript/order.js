@@ -1,7 +1,12 @@
+import { totalPrice, formatPrice } from "./shared/utils/price.js";
+
 const fields = document.querySelectorAll(".field");
 const [lastName, firstName, email, address, city] = fields;
 const errors = document.querySelectorAll("small");
 const btns = document.querySelectorAll("button");
+const totalPriceDOM = document.querySelector("#total-price");
+
+totalPriceDOM.innerHTML = formatPrice(totalPrice());
 
 const getError = (fieldName) => {
   return [...errors].filter((err) =>

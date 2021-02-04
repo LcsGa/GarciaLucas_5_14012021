@@ -1,7 +1,9 @@
-import { fetchArticles } from "./fetchArticles.js";
+import { fetchArticles } from "./shared/components/fetchArticles.js";
+import { formatPrice, updatePrice } from "./shared/utils/price.js";
+import { modifyQuantityHandler } from "./shared/utils/quantity.js";
+import { addToCart } from "./shared/components/addToCart.js";
 
 const main = document.querySelector("main");
-let quantityBtn, quantityDOM, lenseDOM, articlePriceDOM, formBtns;
 const articleId = new URL(location.href).searchParams.get("id");
 let article, price;
 
@@ -47,9 +49,7 @@ const displayArticle = (articles, prices) => {
           </div>
         </div>
         <div class="group">
-          <p class="article-price">${price.integer}€<sup>${
-    price.decimal
-  }</sup></p>
+          <p class="article-price">${formatPrice(price.double * 100)}</p>
         </div>
         <div class="btn-container">
           <button class="btn btn-primary" type="button"><i class="fas fa-cart-plus"></i> Ajouter</button>
@@ -64,99 +64,35 @@ const displayArticle = (articles, prices) => {
 //_________________________________________________________________________________
 fetchArticles(displayArticle, articleId)
   .then(() => {
-    quantityBtn = document.querySelectorAll(".btn-quantity");
-    quantityDOM = document.querySelector("#quantity");
-    lenseDOM = document.querySelector("#lense");
-    articlePriceDOM = document.querySelector(".article-price");
-    formBtns = document.querySelectorAll(".btn-container button");
+    const quantityBtn = document.querySelectorAll(".btn-quantity");
+    const quantityDOM = document.querySelector("#quantity");
+    const lenseDOM = document.querySelector("#lense");
+    const articlePriceDOM = document.querySelector(".article-price");
+    const formBtns = document.querySelectorAll(".btn-container button");
     const [addToCartBtn, cancelBtn] = formBtns;
 
-    const modifyValue = (value) => {
-      if (
-        +quantityDOM.value < +quantityDOM.min ||
-        (+quantityDOM.value === +quantityDOM.min && value === +quantityDOM.min)
-      ) {
-        quantityDOM.value = quantityDOM.min;
-      } else if (
-        +quantityDOM.value > +quantityDOM.max ||
-        (+quantityDOM.value === +quantityDOM.max && value === +quantityDOM.max)
-      ) {
-        quantityDOM.value = quantityDOM.max;
-      } else if (value === +quantityDOM.min) {
-        +quantityDOM.value--;
-      } else {
-        +quantityDOM.value++;
-      }
-      quantityDOM.dispatchEvent(new Event("change"));
-    };
-
-    const fixQuantity = () => {
-      if (+quantityDOM.value < +quantityDOM.min) {
-        quantityDOM.value = quantityDOM.min;
-      }
-      if (+quantityDOM.value > +quantityDOM.max) {
-        quantityDOM.value = quantityDOM.max;
-      }
-    };
-
-    const updatePrice = () => {
-      fixQuantity();
-      price.double = (article.price / 100) * +quantityDOM.value;
-      articlePriceDOM.innerHTML = `${price.integer}€<sup>${price.decimal}</sup>`;
-    };
-
-    quantityDOM.addEventListener("change", updatePrice);
+    quantityDOM.addEventListener("change", () =>
+      updatePrice(quantityDOM, articlePriceDOM, article.price)
+    );
 
     quantityBtn.forEach((btn) => {
       btn.addEventListener("click", () => {
-        if (btn.classList.contains("quantity-remove")) {
-          modifyValue(+quantityDOM.min);
-        } else {
-          modifyValue(+quantityDOM.max);
-        }
+        modifyQuantityHandler(btn, quantityDOM);
       });
     });
 
     addToCartBtn.addEventListener("click", () => {
-      //TODO refactor
-      let item;
-      let variantIndex = 0;
-      if (localStorage[article.name]) {
-        item = JSON.parse(localStorage[article.name]);
-        variantIndex = item.variants.findIndex(
-          (variant) => variant.lense === lenseDOM.value
-        );
-        if (variantIndex === -1) {
-          item.variants.push({
-            lense: lenseDOM.value,
-            quantity: +quantityDOM.value,
-          });
-        } else {
-          const newQuantity =
-            item.variants[variantIndex].quantity + +quantityDOM.value;
-          item.variants[variantIndex].quantity =
-            newQuantity <= +quantityDOM.max ? newQuantity : +quantityDOM.max;
-        }
-      } else {
-        item = {
-          id: article._id,
-          variants: [{ lense: lenseDOM.value, quantity: +quantityDOM.value }],
-        };
-      }
-      if (variantIndex === -1) variantIndex = item.variants.length - 1;
-      item.variants[variantIndex].totalPrice =
-        item.variants[variantIndex].quantity * article.price;
-      localStorage.setItem(article.name, JSON.stringify(item));
+      const quantity = +quantityDOM.value;
+      const item = addToCart(article, lenseDOM.value, quantity, quantityDOM);
       location.reload();
       //TODO popup
-      const limitExceeded =
-        +quantityDOM.value + item.quantity > 10 ? true : false;
+      // const limitExceeded =
+      //   +quantityDOM.value + item.quantity > 10 ? true : false;
       alert(
         `Vous avez ajouté ${+quantityDOM.value} ${
           +quantityDOM.value > 1 ? "articles" : "articles"
-        } avec l'option <${item.lense}>
-        
-          Vous en avez désormais ${item.quantity} dans votre panier !`
+        } avec la lentille "${lenseDOM.value}"
+        \nVous en avez désormais ${item.quantity} dans votre panier !`
       );
     });
 

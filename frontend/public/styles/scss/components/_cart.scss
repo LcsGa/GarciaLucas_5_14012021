@@ -1,13 +1,4 @@
 #empty-cart {
-  @include box-model;
-  height: 60%;
-  width: 100%;
-  max-width: 80rem;
-  padding: 2rem 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   span {
     padding: 1vh;
     background: -webkit-linear-gradient(

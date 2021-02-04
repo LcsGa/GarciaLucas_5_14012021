@@ -2,3 +2,9 @@ extends layout.pug
 
 block content
   main
+    #page-not-found.information-box
+      img(src="images/404.png")
+      .group-text
+        h2 Oups !
+        p Nous n'avons trouvé aucun article à afficher...
+      a.btn.btn-primary(href="/") Revenir à l'accueil

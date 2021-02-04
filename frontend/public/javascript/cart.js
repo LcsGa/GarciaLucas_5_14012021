@@ -1,5 +1,12 @@
-import { fetchArticles, price } from "./fetchArticles.js";
-import { itemVariants } from "./services.js";
+import { fetchArticles } from "./shared/components/fetchArticles.js";
+import {
+  formatPrice,
+  updatePrice,
+  actualizeTotalPrices,
+} from "./shared/utils/price.js";
+import { modifyQuantityHandler } from "./shared/utils/quantity.js";
+import { addToCart } from "./shared/components/addToCart.js";
+import { updateArticleNb } from "./shared/components/preload.js";
 
 const articleDOM = document.querySelector("article");
 const totalPriceDOM = document.querySelector("#total-price");
@@ -38,7 +45,10 @@ const displayItems = (articles) => {
         <form>
           <div class="group">
             <label>Option</label>
-            <input type="text" value="${variant.lense}" readonly/>
+            <input  class="chosen-lense" 
+                    type="text" 
+                    value="${variant.lense}" 
+                    readonly/>
           </div>
           <div class="group">
             <label for="quantity-${article._id}">Quantité</label>
@@ -46,20 +56,20 @@ const displayItems = (articles) => {
               <button class="btn btn-quantity quantity-remove" type="button">
                 <i class="fas fa-minus"></i>
               </button>
-              <input id="quantity-${
-                article._id
-              }" class="quantity" type="number" min="1" max="10" value="${
-      variant.quantity
-    }"/>
+              <input  id="quantity-${article._id}" 
+                      class="quantity" 
+                      type="number" 
+                      min="1" 
+                      max="10" 
+                      value="${variant.quantity}" 
+                      readonly/>
               <button class="btn btn-quantity quantity-add" type="button">
                 <i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
           <div class="group">
-            <p class="article-price">${
-              price(variant.totalPrice).integer
-            }€<sup>${price(variant.totalPrice).decimal}</sup></p>
+            <p class="article-price">${formatPrice(variant.totalPrice)}</p>
           </div>
         </form>
       </figcaption>
@@ -76,19 +86,8 @@ items.forEach(async (item, i) => {
         if (i === items.length - 1) {
           const deleteBtns = document.querySelectorAll(".btn-delete");
           const itemsDOM = document.querySelectorAll(".cart-item");
-          const totalPrice = itemVariants.reduce((acc, item) => {
-            acc += item.totalPrice;
-            return acc;
-          }, 0);
-          const threeTimesPrice = (1000 + totalPrice) / 3; // 1000 cents => 10 € administrative fees
 
-          totalPriceDOM.innerHTML = `${price(totalPrice).integer}€<sup>${
-            price(totalPrice).decimal
-          }</sup>`;
-
-          threeTimesPriceDOM.innerHTML = `${
-            price(threeTimesPrice).integer
-          }€<sup>${price(threeTimesPrice).decimal}</sup>`;
+          actualizeTotalPrices(totalPriceDOM, threeTimesPriceDOM);
 
           const removeVariant = (articleName, variantToDelete) => {
             const item = JSON.parse(localStorage.getItem(articleName));
@@ -118,55 +117,29 @@ items.forEach(async (item, i) => {
           });
 
           itemsDOM.forEach((itemDOM) => {
-            //TODO : REPETITION from article.js
             const itemQuantityDOM = itemDOM.querySelector(".quantity");
             const quantityBtn = itemDOM.querySelectorAll(".btn-quantity");
+            let quantity;
+            const articlePriceDOM = itemDOM.querySelector(".article-price");
+            const chosenLense = itemDOM.querySelector(".chosen-lense");
+            const article = { name: itemDOM.firstChild.dataset.name };
+            const localStorageItem = localStorage.getItem(article.name);
+            const item = JSON.parse(localStorageItem);
 
-            const modifyValue = (value) => {
-              if (
-                +itemQuantityDOM.value < +itemQuantityDOM.min ||
-                (+itemQuantityDOM.value === +itemQuantityDOM.min &&
-                  value === +itemQuantityDOM.min)
-              ) {
-                itemQuantityDOM.value = itemQuantityDOM.min;
-              } else if (
-                +itemQuantityDOM.value > +itemQuantityDOM.max ||
-                (+itemQuantityDOM.value === +itemQuantityDOM.max &&
-                  value === +itemQuantityDOM.max)
-              ) {
-                itemQuantityDOM.value = itemQuantityDOM.max;
-              } else if (value === +itemQuantityDOM.min) {
-                +itemQuantityDOM.value--;
-              } else {
-                +itemQuantityDOM.value++;
-              }
-              itemQuantityDOM.dispatchEvent(new Event("change"));
-            };
+            article._id = item.id;
+            article.price = item.price;
 
-            const fixQuantity = () => {
-              if (+itemQuantityDOM.value < +itemQuantityDOM.min) {
-                itemQuantityDOM.value = itemQuantityDOM.min;
-              }
-              if (+itemQuantityDOM.value > +itemQuantityDOM.max) {
-                itemQuantityDOM.value = itemQuantityDOM.max;
-              }
-            };
-
-            const updatePrice = () => {
-              fixQuantity();
-              // price.double = (article.price / 100) * +itemQuantityDOM.value;
-              // articlePriceDOM.innerHTML = `${price.integer}€<sup>${price.decimal}</sup>`;
-            };
-
-            itemQuantityDOM.addEventListener("change", updatePrice);
+            itemQuantityDOM.addEventListener("change", () => {
+              addToCart(article, chosenLense.value, quantity, itemQuantityDOM);
+              updatePrice(itemQuantityDOM, articlePriceDOM, article.price);
+              updateArticleNb();
+              actualizeTotalPrices(totalPriceDOM, threeTimesPriceDOM);
+            });
 
             quantityBtn.forEach((btn) => {
               btn.addEventListener("click", () => {
-                if (btn.classList.contains("quantity-remove")) {
-                  modifyValue(+itemQuantityDOM.min);
-                } else {
-                  modifyValue(+itemQuantityDOM.max);
-                }
+                quantity = btn.classList.contains("quantity-remove") ? -1 : 1;
+                modifyQuantityHandler(btn, itemQuantityDOM);
               });
             });
           });

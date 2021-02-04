@@ -1,3 +1,5 @@
+import { price } from "../utils/price.js";
+
 export const fetchArticles = async (callbackfn, articleId = "") => {
   try {
     const response = await fetch(`${location.origin}/api/cameras/${articleId}`);
@@ -10,17 +12,4 @@ export const fetchArticles = async (callbackfn, articleId = "") => {
   } catch (e) {
     console.error(e);
   }
-};
-
-export const price = (price) => {
-  return {
-    double: (price / 100).toFixed(2),
-    get integer() {
-      return Math.trunc(this.double);
-    },
-    get decimal() {
-      const decimal = Math.ceil((this.double - this.integer) * 100);
-      return decimal === 0 ? "00" : decimal;
-    },
-  };
 };

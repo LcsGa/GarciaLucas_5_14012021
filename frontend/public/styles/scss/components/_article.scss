@@ -1,28 +1,35 @@
-#container main > figure.article {
-  height: 90%;
-  min-height: 70rem;
-  width: 90%;
-  min-width: 100rem;
-  max-width: 124rem;
-  .article {
-    &-img {
-      flex: 8;
-      padding: 1rem;
-    }
-    &-description {
-      text-align: justify;
-    }
-    &-price {
-      margin-top: -5rem;
+#container main {
+  #page-not-found {
+    img {
+      height: 25rem;
     }
   }
-  figcaption {
-    flex: 3;
-    padding: 1rem 3rem 2rem 1rem;
-    header {
-      margin-bottom: 10rem;
-      h2 {
-        color: var(--accent);
+  figure.article {
+    height: 90%;
+    min-height: 70rem;
+    width: 90%;
+    min-width: 100rem;
+    max-width: 124rem;
+    .article {
+      &-img {
+        flex: 8;
+        padding: 1rem;
+      }
+      &-description {
+        text-align: justify;
+      }
+      &-price {
+        margin-top: -5rem;
+      }
+    }
+    figcaption {
+      flex: 3;
+      padding: 1rem 3rem 2rem 1rem;
+      header {
+        margin-bottom: 10rem;
+        h2 {
+          color: var(--accent);
+        }
       }
     }
   }

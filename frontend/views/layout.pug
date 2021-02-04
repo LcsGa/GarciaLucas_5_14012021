@@ -15,7 +15,7 @@ html(lang="fr")
       include includes/header.pug
       block content
       include includes/footer.pug
-    script(src="javascript/preload.js" type="module")
+    script(src="javascript/shared/components/preload.js" type="module")
     if (path === "/")
       script(src="javascript/assets/home-scroll.js", type="module")
       script(src="javascript/home.js" type="module")
@@ -25,4 +25,4 @@ html(lang="fr")
       script(src="javascript/assets/cart-style.js")
       script(src="javascript/cart.js" type="module")
     else if (path === "/order")
-      script(src="javascript/order.js")
+      script(src="javascript/order.js" type="module")

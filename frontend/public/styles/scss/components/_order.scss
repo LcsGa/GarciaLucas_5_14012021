@@ -35,5 +35,24 @@
   }
   .btn {
     padding: 1rem 2rem 1rem 1.5rem;
+    &-container {
+      margin-top: 5rem;
+      .order-container {
+        position: relative;
+        #order-summary {
+          position: absolute;
+          display: flex;
+          color: var(--hint);
+          top: -2.5rem;
+          p.label {
+            font-weight: 700;
+            margin-right: 1.5rem;
+          }
+          p#total-price {
+            transform: translateY(-0.2rem);
+          }
+        }
+      }
+    }
   }
 }
