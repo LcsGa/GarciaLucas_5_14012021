@@ -262,9 +262,6 @@ i.fa-question-circle {
             font-size: 2.5rem;
             font-weight: 700; }
 
-#container main #page-not-found img {
-  height: 25rem; }
-
 #container main figure.article {
   height: 90%;
   min-height: 70rem;
@@ -296,6 +293,8 @@ i.fa-question-circle {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center; }
+  .information-box img {
+    height: 25rem; }
   .information-box .group-text {
     display: flex;
     justify-content: center;
@@ -305,16 +304,6 @@ i.fa-question-circle {
       margin-bottom: 0; }
     .information-box .group-text p {
       text-align: center; }
-
-#empty-cart span {
-  padding: 1vh;
-  background: -webkit-linear-gradient(45deg, var(--accent) 10%, var(--primary));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transform: translateX(-2vh); }
-  #empty-cart span i {
-    font-size: 20vh; }
 
 #cart-content {
   height: 100%;
@@ -451,6 +440,7 @@ i.fa-question-circle {
   left: 0;
   width: 100%;
   height: 100vh;
+  padding: 0 2rem;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
@@ -460,11 +450,15 @@ i.fa-question-circle {
   background: #fff;
   border-radius: 0.4rem;
   box-shadow: var(--box-shadow);
+  max-width: 55rem;
   padding: 3rem 4rem;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  text-align: justify; }
+  .dialog-box p {
+    margin-bottom: 1rem; }
   .dialog-box .divider {
-    margin: 3rem 0; }
+    margin: 2rem 0 3rem; }
 
 #container {
   min-height: 100vh;

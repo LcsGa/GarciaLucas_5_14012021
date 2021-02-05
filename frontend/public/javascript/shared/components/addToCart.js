@@ -1,12 +1,14 @@
+const getVariantIndex = (item, optionChosen) => {
+  return item.variants.findIndex((variant) => variant.lense === optionChosen);
+};
+
 const addToCart = (article, optionChosen, quantityToAdd, quantityElem) => {
   let item;
   let variantIndex = 0;
 
   if (localStorage[article.name]) {
     item = JSON.parse(localStorage[article.name]);
-    variantIndex = item.variants.findIndex(
-      (variant) => variant.lense === optionChosen
-    );
+    variantIndex = getVariantIndex(item, optionChosen);
 
     if (variantIndex === -1) {
       item.variants.push({
@@ -39,4 +41,4 @@ const addToCart = (article, optionChosen, quantityToAdd, quantityElem) => {
   return item;
 };
 
-export { addToCart };
+export { getVariantIndex, addToCart };

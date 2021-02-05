@@ -29,24 +29,24 @@ const verifyInput = (element, regex) => {
 };
 
 [lastName, firstName].forEach((elem) =>
-  elem.addEventListener("change", function () {
+  elem.addEventListener("keydown", function () {
     verifyInput(this, /^\S[a-zÀ-ÿ ,.'-]+$/);
   })
 );
 
 // General Email Regex (RFC 5322 Official Standard)
-email.addEventListener("change", function () {
+email.addEventListener("keydown", function () {
   verifyInput(
     this,
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i
   );
 });
 
-address.addEventListener("change", function () {
+address.addEventListener("keydown", function () {
   verifyInput(this, /^\S\d{1,4}((\s[a-z]+,?)|,)?((\s)([a-zÀ-ÿ'\s-]+)){2,}$/i);
 });
 
-city.addEventListener("change", function () {
+city.addEventListener("keydown", function () {
   verifyInput(this, /^\S[a-zÀ-ÿ'-\s]+$/i);
 });
 

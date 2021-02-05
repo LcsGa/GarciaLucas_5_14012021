@@ -7,6 +7,7 @@ import {
 import { modifyQuantityHandler } from "./shared/utils/quantity.js";
 import { addToCart } from "./shared/components/addToCart.js";
 import { updateArticleNb } from "./shared/components/preload.js";
+import { informationBox } from "./shared/components/informationBox.js";
 
 const articleDOM = document.querySelector("article");
 const totalPriceDOM = document.querySelector("#total-price");
@@ -16,7 +17,6 @@ const cartContentDOM = document.querySelector("#cart-content");
 const items = Object.values(localStorage).map((item) => JSON.parse(item));
 
 const displayCartContent = () => {
-  emptyCartDOM.classList.add("hidden");
   cartContentDOM.classList.remove("hidden");
 };
 
@@ -80,73 +80,81 @@ const displayItems = (articles) => {
 
 items.forEach(async (item, i) => {
   try {
-    await fetchArticles(displayItems, item.id)
-      .then(() => {
-        // The if statement below is used to verify if all the articles are completely loaded
-        if (i === items.length - 1) {
-          const deleteBtns = document.querySelectorAll(".btn-delete");
-          const itemsDOM = document.querySelectorAll(".cart-item");
+    await fetchArticles(displayItems, item.id);
 
-          actualizeTotalPrices(totalPriceDOM, threeTimesPriceDOM);
+    // The if statement below is used to verify if all the articles are completely loaded
+    if (i === items.length - 1) {
+      const deleteBtns = document.querySelectorAll(".btn-delete");
+      const itemsDOM = document.querySelectorAll(".cart-item");
 
-          const removeVariant = (articleName, variantToDelete) => {
-            const item = JSON.parse(localStorage.getItem(articleName));
-            localStorage.removeItem(articleName);
-            const variants = item.variants;
-            item.variants = [];
-            variants.forEach((variant) => {
-              if (variant.lense !== variantToDelete) {
-                item.variants.push(variant);
-              }
-            });
-            if (item.variants.length) {
-              localStorage.setItem(articleName, JSON.stringify(item));
-            }
-          };
+      actualizeTotalPrices(totalPriceDOM, threeTimesPriceDOM);
 
-          deleteBtns.forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const confirmDeletion = confirm(
-                "Etes vous sûr de vouloir supprimer cet article ?"
-              );
-              if (confirmDeletion) {
-                removeVariant(btn.dataset.name, btn.dataset.lense);
-                location.reload();
-              }
-            });
-          });
-
-          itemsDOM.forEach((itemDOM) => {
-            const itemQuantityDOM = itemDOM.querySelector(".quantity");
-            const quantityBtn = itemDOM.querySelectorAll(".btn-quantity");
-            let quantity;
-            const articlePriceDOM = itemDOM.querySelector(".article-price");
-            const chosenLense = itemDOM.querySelector(".chosen-lense");
-            const article = { name: itemDOM.firstChild.dataset.name };
-            const localStorageItem = localStorage.getItem(article.name);
-            const item = JSON.parse(localStorageItem);
-
-            article._id = item.id;
-            article.price = item.price;
-
-            itemQuantityDOM.addEventListener("change", () => {
-              addToCart(article, chosenLense.value, quantity, itemQuantityDOM);
-              updatePrice(itemQuantityDOM, articlePriceDOM, article.price);
-              updateArticleNb();
-              actualizeTotalPrices(totalPriceDOM, threeTimesPriceDOM);
-            });
-
-            quantityBtn.forEach((btn) => {
-              btn.addEventListener("click", () => {
-                quantity = btn.classList.contains("quantity-remove") ? -1 : 1;
-                modifyQuantityHandler(btn, itemQuantityDOM);
-              });
-            });
-          });
+      const removeVariant = (articleName, variantToDelete) => {
+        const item = JSON.parse(localStorage.getItem(articleName));
+        localStorage.removeItem(articleName);
+        const variants = item.variants;
+        item.variants = [];
+        variants.forEach((variant) => {
+          if (variant.lense !== variantToDelete) {
+            item.variants.push(variant);
+          }
+        });
+        if (item.variants.length) {
+          localStorage.setItem(articleName, JSON.stringify(item));
         }
-      })
-      .catch((e) => console.error(e));
+      };
+
+      deleteBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const confirmDeletion = confirm(
+            "Etes vous sûr de vouloir supprimer cet article ?"
+          );
+          if (confirmDeletion) {
+            removeVariant(btn.dataset.name, btn.dataset.lense);
+            location.reload();
+          }
+        });
+      });
+
+      itemsDOM.forEach((itemDOM) => {
+        const itemQuantityDOM = itemDOM.querySelector(".quantity");
+        const quantityBtn = itemDOM.querySelectorAll(".btn-quantity");
+        let quantity;
+        const articlePriceDOM = itemDOM.querySelector(".article-price");
+        const chosenLense = itemDOM.querySelector(".chosen-lense");
+        const article = { name: itemDOM.firstChild.dataset.name };
+        const localStorageItem = localStorage.getItem(article.name);
+        const item = JSON.parse(localStorageItem);
+
+        article._id = item.id;
+        article.price = item.price;
+
+        itemQuantityDOM.addEventListener("change", () => {
+          addToCart(article, chosenLense.value, quantity, itemQuantityDOM);
+          updatePrice(itemQuantityDOM, articlePriceDOM, article.price);
+          updateArticleNb();
+          actualizeTotalPrices(totalPriceDOM, threeTimesPriceDOM);
+        });
+
+        quantityBtn.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            quantity = btn.classList.contains("quantity-remove") ? -1 : 1;
+            modifyQuantityHandler(btn, itemQuantityDOM);
+          });
+        });
+      });
+    }
   } catch (e) {
     console.error(e);
   }
 });
+
+if (!localStorage.length) {
+  informationBox(
+    "images/empty.png",
+    "Votre panier est vide",
+    "Il semblerait que vous n'ayez pas encore fait votre choix...",
+    "Poursuivre vos achats",
+    main
+  );
+}

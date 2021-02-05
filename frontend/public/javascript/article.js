@@ -1,10 +1,15 @@
 import { fetchArticles } from "./shared/components/fetchArticles.js";
 import { formatPrice, updatePrice } from "./shared/utils/price.js";
 import { modifyQuantityHandler } from "./shared/utils/quantity.js";
-import { addToCart } from "./shared/components/addToCart.js";
-import { appendElement } from "./shared/components/dialog.js";
+import { getVariantIndex, addToCart } from "./shared/components/addToCart.js";
+import {
+  isLimitExceeded,
+  appendDialogBox,
+} from "./shared/components/dialog.js";
 import { updateArticleNb } from "./shared/components/preload.js";
+import { informationBox } from "./shared/components/informationBox.js";
 
+const container = document.querySelector("#container");
 const main = document.querySelector("main");
 const dialogContainer = document.querySelector(".dialog-container");
 const articleId = new URL(location.href).searchParams.get("id");
@@ -45,7 +50,7 @@ const displayArticle = (articles, prices) => {
             <button class="btn btn-quantity quantity-remove" type="button">
               <i class="fas fa-minus"></i>
             </button>
-            <input id="quantity" type="number" min="1" max="10" value="1">
+            <input id="quantity" type="number" min="1" max="10" value="1" readonly>
             <button class="btn btn-quantity quantity-add" type="button">
               <i class="fas fa-plus"></i>
             </button>
@@ -89,21 +94,50 @@ fetchArticles(displayArticle, articleId)
       const item = addToCart(article, lenseDOM.value, quantity, quantityDOM);
       updateArticleNb();
 
-      dialogContainer.classList.remove("hidden");
-      appendElement(
-        { type: "h2", content: "Ajout effectué" },
+      const isQuantityExceeded = isLimitExceeded(
+        +quantityDOM.value,
+        item.variants[getVariantIndex(item, lenseDOM.value)].quantity,
+        +quantityDOM.max
+      );
+
+      appendDialogBox(
+        container,
+        {
+          type: "h2",
+          content: isQuantityExceeded
+            ? "Ajout effectué mais..."
+            : "Ajout effectué",
+        },
+        {
+          primary: {
+            link: "/cart",
+            content: "Voir le panier",
+          },
+          danger: {
+            link: "",
+            content: "Retour",
+          },
+        },
         `Vous avez ajouté <strong>${+quantityDOM.value} ${
           +quantityDOM.value > 1 ? "articles" : "article"
         }</strong> avec l'option "<strong>${lenseDOM.value}</strong>"`,
-        `Vous en avez désormais <strong>${item.quantity}</strong> dans votre panier !`
+        `Vous en avez désormais <strong>${
+          item.variants[getVariantIndex(item, lenseDOM.value)].quantity
+        }</strong> dans votre panier ${
+          isQuantityExceeded ? "(car il s'agit de la quantité maximum) " : ""
+        }!`
       );
-      //TODO popup
-      // const limitExceeded =
-      //   +quantityDOM.value + item.quantity > 10 ? true : false;
     });
 
     cancelBtn.addEventListener("click", () => history.back());
   })
   .catch((e) => {
     console.error(e);
+    informationBox(
+      "images/404.png",
+      "Oups !",
+      "Nous n'avons trouvé aucun article à afficher...",
+      "Retourner à l'accueil",
+      main
+    );
   });
