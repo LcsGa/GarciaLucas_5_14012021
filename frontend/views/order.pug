@@ -16,7 +16,7 @@ block content
           small.error-firstname.hidden *Le prénom que vous avez renseigné n'est pas valide
         .group
           label(for="email") Adresse email
-          input.field#email(type="email", name="email", required="true")
+          input.field#email(type="text", name="email", required="true")
           small.error-email.hidden *L'adresse email que vous avez renseignée n'est pas valide
         .group
           label(for="address") 
@@ -35,7 +35,7 @@ block content
             p.label Total TTC :
             p#total-price 00€
               sup 00
-          button.btn.btn-primary
+          button.btn.btn-primary(type="button")
             i.fad.fa-bags-shopping
             |Valider la commande
         button.btn.btn-danger(type="button") Annuler

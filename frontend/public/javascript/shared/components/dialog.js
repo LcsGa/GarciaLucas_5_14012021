@@ -43,20 +43,27 @@ const pElements = (...paragraphs) => {
 };
 
 const btnElements = (btns) => {
-  const btnPrimaryDOM = document.createElement("a");
-  btnPrimaryDOM.classList.add("btn", "btn-primary");
-  btnPrimaryDOM.href = btns.primary.link;
-  btnPrimaryDOM.innerHTML = btns.primary.content;
-
+  const btnsElem = [];
+  let btnPrimaryDOM;
   let btnDangerDOM;
+
+  if (btns.hasOwnProperty("primary")) {
+    btnPrimaryDOM = document.createElement("a");
+    btnPrimaryDOM.classList.add("btn", "btn-primary");
+    btnPrimaryDOM.href = btns.primary.link;
+    btnPrimaryDOM.innerHTML = btns.primary.content;
+    btnsElem.push(btnPrimaryDOM);
+  }
+
   if (btns.hasOwnProperty("danger")) {
     btnDangerDOM = document.createElement("a");
     btnDangerDOM.classList.add("btn", "btn-danger");
     btnDangerDOM.href = btns.danger.link;
     btnDangerDOM.innerHTML = btns.danger.content;
+    btnsElem.push(btnDangerDOM);
   }
 
-  return [btnPrimaryDOM, btnDangerDOM];
+  return btnsElem;
 };
 
 export { isLimitExceeded, appendDialogBox };
