@@ -2,10 +2,7 @@ import { fetchArticles } from "./shared/components/fetchArticles.js";
 import { formatPrice, updatePrice } from "./shared/utils/price.js";
 import { modifyQuantityHandler } from "./shared/utils/quantity.js";
 import { getVariantIndex, addToCart } from "./shared/components/addToCart.js";
-import {
-  isLimitExceeded,
-  appendDialogBox,
-} from "./shared/components/dialog.js";
+import { DialogBox } from "./shared/components/Dialog.js";
 import { updateArticleNb } from "./shared/components/preload.js";
 import { informationBox } from "./shared/components/informationBox.js";
 
@@ -94,13 +91,12 @@ fetchArticles(displayArticle, articleId)
       const item = addToCart(article, lenseDOM.value, quantity, quantityDOM);
       updateArticleNb();
 
-      const isQuantityExceeded = isLimitExceeded(
-        +quantityDOM.value,
-        item.variants[getVariantIndex(item, lenseDOM.value)].quantity,
-        +quantityDOM.max
-      );
+      const isQuantityExceeded =
+        +quantityDOM.value +
+          item.variants[getVariantIndex(item, lenseDOM.value)].quantity >
+        +quantityDOM.max;
 
-      appendDialogBox(
+      new DialogBox(
         container,
         {
           type: "h2",
@@ -134,7 +130,7 @@ fetchArticles(displayArticle, articleId)
   .catch((e) => {
     console.error(e);
     informationBox(
-      "images/404.png",
+      "images/undraw_page_not_found_su7k.svg",
       "Oups !",
       "Nous n'avons trouvé aucun article à afficher...",
       "Retourner à l'accueil",

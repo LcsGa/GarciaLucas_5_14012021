@@ -151,7 +151,7 @@ items.forEach(async (item, i) => {
 
 if (!localStorage.length) {
   informationBox(
-    "images/empty.png",
+    "images/undraw_empty_xct9.svg",
     "Votre panier est vide",
     "Il semblerait que vous n'ayez pas encore fait votre choix...",
     "Poursuivre vos achats",

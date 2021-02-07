@@ -1,6 +1,6 @@
 import { totalPrice, formatPrice } from "./shared/utils/price.js";
 import { order } from "./shared/components/fetchArticles.js";
-import { appendDialogBox } from "./shared/components/dialog.js";
+import { DialogBox } from "./shared/components/Dialog.js";
 
 const container = document.querySelector("#container");
 const fields = document.querySelectorAll(".field");
@@ -87,7 +87,7 @@ btns[0].addEventListener("click", async () => {
     );
     const orderResponse = await response.json();
     if (response.status < 300) {
-      appendDialogBox(
+      new DialogBox(
         container,
         {
           type: "h2",
@@ -106,7 +106,7 @@ btns[0].addEventListener("click", async () => {
       );
       localStorage.clear();
     } else {
-      appendDialogBox(
+      new DialogBox(
         container,
         {
           type: "h2",
