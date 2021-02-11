@@ -24,12 +24,8 @@ const modifyQuantityHandler = (btn, elem) => {
 };
 
 const fixQuantity = (elem) => {
-  if (+elem.value < +elem.min) {
-    elem.value = elem.min;
-  }
-  if (+elem.value > +elem.max) {
-    elem.value = elem.max;
-  }
+  +elem.value < +elem.min && (elem.value = elem.min);
+  +elem.value > +elem.max && (elem.value = elem.max);
 };
 
 export { modifyQuantityHandler, fixQuantity };

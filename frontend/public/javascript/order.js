@@ -28,7 +28,7 @@ const loadFields = () => {
 loadFields();
 
 window.addEventListener("load", () => {
-  if (!localStorage.length) location.replace("/");
+  !localStorage.length && location.replace("/");
 });
 
 window.addEventListener("DOMContentLoaded", () => {

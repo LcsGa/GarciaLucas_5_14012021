@@ -95,13 +95,10 @@ items.forEach(async (item, i) => {
         const variants = item.variants;
         item.variants = [];
         variants.forEach((variant) => {
-          if (variant.lense !== variantToDelete) {
-            item.variants.push(variant);
-          }
+          variant.lense !== variantToDelete && item.variants.push(variant);
         });
-        if (item.variants.length) {
+        item.variants.length &&
           localStorage.setItem(articleName, JSON.stringify(item));
-        }
       };
 
       deleteBtns.forEach((btn) => {

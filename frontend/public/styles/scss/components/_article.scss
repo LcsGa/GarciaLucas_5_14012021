@@ -1,27 +1,28 @@
-#container main {
+#container main.article {
+  padding: 3rem 0;
   figure.article {
-    height: 90%;
-    min-height: 70rem;
+    height: clamp(40rem, 55vw, 90%);
     width: 90%;
-    min-width: 100rem;
     max-width: 124rem;
-    .article {
-      &-img {
-        flex: 8;
-        padding: 1rem;
-      }
-      &-description {
-        text-align: justify;
-      }
-      &-price {
-        margin-top: -5rem;
-      }
+    @include md {
+      flex-direction: column;
+      height: 100%;
+      width: 70%;
+    }
+    @include sm {
+      width: 90%;
     }
     figcaption {
       flex: 3;
       padding: 1rem 3rem 2rem 1rem;
+      @include xl {
+        flex: 4;
+      }
+      @include md {
+        padding: 1rem 2rem 2rem;
+      }
       header {
-        margin-bottom: 10rem;
+        margin-bottom: clamp(2rem, 7vw, 10rem);
       }
     }
   }

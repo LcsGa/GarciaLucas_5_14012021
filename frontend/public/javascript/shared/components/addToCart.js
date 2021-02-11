@@ -32,7 +32,7 @@ const addToCart = (article, optionChosen, quantityToAdd, quantityElem) => {
       variants: [{ lense: optionChosen, quantity: +quantityElem.value }],
     };
   }
-  if (variantIndex === -1) variantIndex = item.variants.length - 1;
+  variantIndex === -1 && (variantIndex = item.variants.length - 1);
 
   item.variants[variantIndex].totalPrice =
     item.variants[variantIndex].quantity * article.price;

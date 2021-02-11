@@ -33,7 +33,7 @@ const displayArticle = (articles, prices) => {
         <p class="article-id">Réf. ${article._id}</p>
       </header>
       <form>
-        <div class="group">
+        <div class="group group-description">
           <p class="label">Description du produit</p>
           <p class="article-description">${article.description}</p>
         </div>
@@ -57,7 +57,10 @@ const displayArticle = (articles, prices) => {
           <p class="article-price">${formatPrice(price.double * 100)}</p>
         </div>
         <div class="btn-container">
-          <button class="btn btn-primary" type="button"><i class="fas fa-cart-plus"></i> Ajouter</button>
+          <button class="btn btn-primary" type="button">
+            <i class="fas fa-cart-plus"></i>
+            <span> Ajouter</span>
+          </button>
           <button class="btn btn-danger" type="button">Quitter</button>
         </div>
       </form>

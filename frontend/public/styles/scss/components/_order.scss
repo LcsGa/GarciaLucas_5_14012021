@@ -1,8 +1,12 @@
 #contact-form {
   @include box-model;
   padding: 3rem 4rem;
-  height: 90%;
+  margin: 2rem;
+  height: 72rem;
   max-width: 60rem;
+  @include xs {
+    padding: 1.5rem 2rem;
+  }
   h2 {
     text-align: center;
     position: relative;
@@ -18,21 +22,24 @@
     flex-direction: column;
     justify-content: space-evenly;
     padding: 5rem 0;
+    @include xs {
+      padding: 2.5rem 0;
+    }
     .group {
       position: relative;
       label {
         position: relative;
       }
-      small {
-        position: absolute;
-        bottom: -1.6rem;
-      }
     }
   }
   .btn {
-    padding: 1rem 2rem 1rem 1.5rem;
     &-container {
       margin-top: 5rem;
+      span {
+        @include xs {
+          display: none;
+        }
+      }
       .order-container {
         position: relative;
         #order-summary {
@@ -43,6 +50,9 @@
           p.label {
             font-weight: 700;
             margin-right: 1.5rem;
+            @include xs {
+              display: none;
+            }
           }
           p#total-price {
             transform: translateY(-0.2rem);

@@ -24,6 +24,16 @@
   outline: none;
   white-space: nowrap;
   transition: all 0.5s ease-in-out;
+  @include md {
+    font-size: 1.9rem;
+    padding: 0.8rem 1.5rem;
+  }
+  @include sm {
+    font-size: 1.7rem;
+  }
+  @include xs {
+    font-size: 1.5rem;
+  }
   &-container {
     display: flex;
     justify-content: space-evenly;
@@ -65,6 +75,19 @@
   }
 }
 
+.group {
+  margin-bottom: 1rem;
+  .label,
+  label {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    @include xs {
+      font-size: 1.5rem;
+    }
+  }
+}
+
 figure.article {
   .article {
     &-img {
@@ -74,11 +97,17 @@ figure.article {
     &-description {
       text-align: justify;
     }
-    &-price {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 3rem;
-      text-align: center;
+  }
+}
+
+.article {
+  &-price {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 3rem;
+    text-align: center;
+    @include xs {
+      font-size: 2.5rem;
     }
   }
 }
