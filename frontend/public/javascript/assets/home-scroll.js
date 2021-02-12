@@ -8,7 +8,7 @@ const initScroll = () => {
 };
 
 const setOffset = (e) => {
-  offset -= e.deltaY * 1.5;
+  offset -= (e.deltaY / Math.abs(e.deltaY)) * 80;
   const maxOffset = gallery.clientWidth - window.innerWidth;
 
   if (offset > 0) {
@@ -29,7 +29,7 @@ main.addEventListener("wheel", scroll);
 
 window.addEventListener("resize", () => {
   initScroll();
-  window.innerWidth <= 480
+  window.innerWidth <= 767
     ? main.removeEventListener("wheel", scroll)
     : main.addEventListener("wheel", scroll);
 });
