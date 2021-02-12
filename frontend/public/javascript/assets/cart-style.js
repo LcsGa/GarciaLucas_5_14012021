@@ -3,8 +3,10 @@ const main = document.querySelector("main");
 const footer = document.querySelector("footer");
 
 const setHeight = () => {
-  main.style.height =
-    window.innerHeight - header.clientHeight - footer.clientHeight + "px";
+  if (window.innerWith > 767) {
+    main.style.height =
+      window.innerHeight - header.clientHeight - footer.clientHeight + "px";
+  }
 };
 
 window.addEventListener("load", setHeight);

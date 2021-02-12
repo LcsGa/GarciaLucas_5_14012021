@@ -1,9 +1,6 @@
 main.home {
   overflow: hidden;
   position: relative;
-  @include xs {
-    overflow: visible;
-  }
   .gallery-container {
     position: absolute;
     height: 50rem;
@@ -14,15 +11,11 @@ main.home {
       height: 42rem;
     }
     @include sm {
-      height: 35rem;
-      padding: 0 1.5rem;
-    }
-    @include xs {
       position: static;
       height: auto;
-      max-width: 85%;
       flex-direction: column;
-      padding: 3rem 0 0;
+      align-items: center;
+      padding: 3rem 3rem 0;
     }
     .gallery-item {
       height: 100%;
@@ -34,31 +27,30 @@ main.home {
         min-width: 50rem;
       }
       @include sm {
-        width: 40rem;
+        width: 100%;
         min-width: 40rem;
-        margin: 0 1.5rem;
+        margin: 0 0 3rem;
       }
       @include xs {
         width: 100%;
         min-width: 100%;
-        margin: 0 0 3rem;
       }
       a {
         figure {
+          height: 100%;
+          padding: 1rem;
+          flex-direction: column;
           transition: all 0.5s ease;
           &:hover {
             transform: translateY(-2rem) scale(1.02, 1.02);
             box-shadow: 0 6px 8px rgba(60, 64, 67, 0.3),
               0 6px 10px rgba(60, 64, 67, 0.15);
-            @include xs {
+            @include sm {
               transform: translateY(-1rem) scale(1.02, 1.02);
               box-shadow: 0 3px 4px rgba(60, 64, 67, 0.3),
                 0 3px 5px rgba(60, 64, 67, 0.15);
             }
           }
-          height: 100%;
-          padding: 1rem;
-          flex-direction: column;
           .article-img {
             flex: 4;
           }

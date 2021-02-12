@@ -3,6 +3,10 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  @include sm {
+    flex-direction: column;
+    height: auto;
+  }
   article {
     max-height: 100%;
     padding: 2rem 5rem;
@@ -10,43 +14,79 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    // Hiding scrollbar
-    &::-webkit-scrollbar {
-      display: none; // Chrome
+    @include xs {
+      padding: 1rem 3rem;
     }
-    -ms-overflow-style: none; // IE and Edge
-    scrollbar-width: none; // Firefox
     .cart-item {
       width: 100%;
       max-width: 80rem;
-      position: relative;
       transform: translateX((-7.5rem / 4));
-      .btn-delete {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(50%, -50%);
+      @include xl {
+        transform: none;
+      }
+      @include sm {
+        display: flex;
+        justify-content: center;
       }
       figure {
         margin: 2rem 0;
         height: 30rem;
+        overflow: visible;
+        @include xl {
+          flex-direction: column;
+          height: auto;
+          max-width: 50rem;
+        }
         .article {
           &-img {
             width: 30rem;
+            border-radius: 0.4rem 0 0 0.4rem;
+            overflow: hidden;
+            @include xl {
+              width: 100%;
+              border-radius: 0.4rem 0.4rem 0 0;
+            }
           }
           &-price {
             color: var(--accent);
             font-weight: 700;
             font-size: 3rem;
             text-align: center;
+            @include md {
+              font-size: 2.8rem;
+            }
+            @include sm {
+              font-size: 2.6rem;
+            }
+            @include xs {
+              font-size: 2.5rem;
+            }
           }
         }
         figcaption {
+          position: relative;
           flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           padding: 2rem 8rem 2rem 3rem;
+          @include xl {
+            padding: 2rem 3rem;
+          }
+          @include xs {
+            padding: 1rem 2rem;
+          }
+          .btn-delete {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(50%, -50%);
+            @include xl {
+              transform: none;
+              top: 1rem;
+              right: 1rem;
+            }
+          }
           header {
             margin-bottom: 2rem;
             h2 {
@@ -61,11 +101,32 @@
     }
   }
   aside {
-    @include centered;
     height: 100%;
+    padding: 4rem 5rem 0 0;
+    position: relative;
+    @include sm {
+      padding: 2rem 5rem;
+      display: flex;
+      justify-content: center;
+    }
+    @include xs {
+      padding: 2rem 3rem;
+      padding-bottom: 3rem;
+    }
     #purchase-summary {
       @include box-model;
+      max-width: 60rem;
       padding: 3rem 4rem;
+      position: sticky;
+      top: 4rem;
+      @include sm {
+        width: 100%;
+        max-width: 50rem;
+        padding: 2rem 3rem;
+      }
+      @include sm {
+        padding: 2rem 3rem;
+      }
       .divider {
         margin: 2rem 0;
       }
@@ -89,6 +150,15 @@
         font-size: 2.6rem;
         font-weight: 700;
         color: var(--hint);
+        @include md {
+          font-size: 2.4rem;
+        }
+        @include sm {
+          font-size: 2.2rem;
+        }
+        @include xs {
+          font-size: 2rem;
+        }
       }
       .informations {
         small {

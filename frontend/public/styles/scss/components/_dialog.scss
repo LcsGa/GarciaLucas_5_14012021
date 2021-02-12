@@ -16,6 +16,12 @@
     display: flex;
     flex-direction: column;
     text-align: justify;
+    @include sm {
+      padding: 2.5rem 3.5rem;
+    }
+    @include xs {
+      padding: 1.5rem 2rem;
+    }
     p {
       margin-bottom: 1rem;
     }

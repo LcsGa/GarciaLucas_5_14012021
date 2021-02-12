@@ -32,12 +32,12 @@ const displayItems = (articles) => {
       <div class="article-img">
         <img src="${article.imageUrl}" alt="Appareil photo">
       </div>
-      <button class="btn btn-delete" 
+      <figcaption>
+        <button class="btn btn-delete" 
               data-name="${article.name}" 
               data-lense="${variant.lense}">
-        <i class="fas fa-trash-alt"></i>
-      </button>
-      <figcaption>
+          <i class="fas fa-trash-alt"></i>
+        </button>
         <header>
           <h2 class="article-name">${article.name}</h2>
           <p class="article-id">Réf. ${article._id}</p>

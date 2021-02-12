@@ -81,6 +81,31 @@ form {
   }
 }
 
+.group {
+  margin-bottom: 1rem;
+  .label,
+  label {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    @include xs {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+figure.article {
+  .article {
+    &-img {
+      flex: 8;
+      padding: 1rem;
+    }
+    &-description {
+      text-align: justify;
+    }
+  }
+}
+
 i.fa-question-circle {
   font-size: 1.2rem;
   position: absolute;
