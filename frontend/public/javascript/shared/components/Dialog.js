@@ -3,6 +3,7 @@ export class DialogBox {
     this.appendDialogBox(toAppend, title, btns, ...paragraphs);
   }
 
+  // Appends the dialog Box to the DOM and thus, displays it within the navigator
   appendDialogBox(toAppend, title, btns, ...paragraphs) {
     const dialogContainerDOM = document.createElement("div");
     dialogContainerDOM.classList.add("dialog-container");
@@ -31,6 +32,7 @@ export class DialogBox {
     toAppend.appendChild(dialogContainerDOM);
   }
 
+  // Returns the title element as an HTML element
   titleElement(title) {
     const titleDOM = document.createElement(title.type);
     titleDOM.classList.add("title-primary");
@@ -38,6 +40,7 @@ export class DialogBox {
     return titleDOM;
   }
 
+  // Returns a list of all the paragraphs (as HTML elements) given as an argument of the function
   pElements(...paragraphs) {
     return paragraphs.map((p) => {
       const elemDOM = document.createElement("p");

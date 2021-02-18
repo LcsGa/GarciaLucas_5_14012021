@@ -7,6 +7,7 @@ const initScroll = () => {
   gallery.style.left = "0px";
 };
 
+// Sets the offset of the scroll, independentmy of the navigator and with min and max limits
 const setOffset = (e) => {
   offset -= (e.deltaY / Math.abs(e.deltaY)) * 80;
   const maxOffset = gallery.clientWidth - window.innerWidth;

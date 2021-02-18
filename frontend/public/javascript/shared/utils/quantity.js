@@ -1,3 +1,4 @@
+// Modifies the quantity of articles displayed within the navigator and verifies if the max or min values ar not exceeded
 const modifyQuantity = (elem, value) => {
   if (
     +elem.value < +elem.min ||
@@ -17,6 +18,7 @@ const modifyQuantity = (elem, value) => {
   elem.dispatchEvent(new Event("change"));
 };
 
+// Event handler called on btn (+ or -) click, used to update the value displayed within the navigator
 const modifyQuantityHandler = (btn, elem) => {
   const isBtnToRemove = btn.classList.contains("quantity-remove");
   const limitValue = isBtnToRemove ? "min" : "max";

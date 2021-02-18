@@ -1,7 +1,8 @@
 import { fetchArticles } from "./shared/components/fetchArticles.js";
+import { getVariantIndex } from "./shared/utils/itemVariants.js";
 import { formatPrice, updatePrice } from "./shared/utils/price.js";
 import { modifyQuantityHandler } from "./shared/utils/quantity.js";
-import { getVariantIndex, addToCart } from "./shared/components/addToCart.js";
+import { addToCart } from "./shared/components/addToCart.js";
 import { DialogBox } from "./shared/components/Dialog.js";
 import { updateArticleNb } from "./shared/components/preload.js";
 import { informationBox } from "./shared/components/informationBox.js";
@@ -12,6 +13,7 @@ const dialogContainer = document.querySelector(".dialog-container");
 const articleId = new URL(location.href).searchParams.get("id");
 let article, price;
 
+// Returns an array containing all the options of the article
 const options = (article) => {
   const options = article.lenses;
   return options.map((lense) => {

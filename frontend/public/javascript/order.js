@@ -9,14 +9,15 @@ const errors = document.querySelectorAll("small");
 const btns = document.querySelectorAll("button");
 const totalPriceDOM = document.querySelector("#total-price");
 
-totalPriceDOM.innerHTML = formatPrice(totalPrice());
+window.addEventListener("load", () => {
+  !localStorage.length && location.replace("/");
+});
 
-const getError = (fieldName) => {
-  return [...errors].filter((err) =>
-    err.classList.contains(`error-${fieldName}`)
-  )[0];
-};
+window.addEventListener("DOMContentLoaded", () => {
+  fields.forEach((field) => field.dispatchEvent(new Event("change")));
+});
 
+// Loads the input fields if some are saved within the session storage
 const loadFields = () => {
   if (sessionStorage.length) {
     Object.entries(sessionStorage).forEach((storedField) => {
@@ -27,13 +28,14 @@ const loadFields = () => {
 };
 loadFields();
 
-window.addEventListener("load", () => {
-  !localStorage.length && location.replace("/");
-});
+totalPriceDOM.innerHTML = formatPrice(totalPrice());
 
-window.addEventListener("DOMContentLoaded", () => {
-  fields.forEach((field) => field.dispatchEvent(new Event("change")));
-});
+// Returns the error element of the field given as the argument of the function
+const getError = (fieldName) => {
+  return [...errors].filter((err) =>
+    err.classList.contains(`error-${fieldName}`)
+  )[0];
+};
 
 const verifyInput = (elem, regex) => {
   const error = getError(elem.id);
@@ -43,8 +45,8 @@ const verifyInput = (elem, regex) => {
     error.classList.add("error");
     elem.classList.add("error-input");
   } else {
-    error.classList.remove("error");
     error.classList.add("hidden");
+    error.classList.remove("error");
     elem.classList.remove("error-input");
   }
 

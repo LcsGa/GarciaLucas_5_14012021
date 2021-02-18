@@ -1,7 +1,6 @@
-const getVariantIndex = (item, optionChosen) => {
-  return item.variants.findIndex((variant) => variant.lense === optionChosen);
-};
+import { getVariantIndex } from "../utils/itemVariants.js";
 
+// Adds (or modifies) the article given as an argument of the function, with the different information needed
 const addToCart = (article, optionChosen, quantityToAdd, quantityElem) => {
   let item;
   let variantIndex = 0;
@@ -41,4 +40,4 @@ const addToCart = (article, optionChosen, quantityToAdd, quantityElem) => {
   return item;
 };
 
-export { getVariantIndex, addToCart };
+export { addToCart };

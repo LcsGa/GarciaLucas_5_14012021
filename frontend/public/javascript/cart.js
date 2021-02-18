@@ -4,6 +4,7 @@ import {
   updatePrice,
   actualizeTotalPrices,
 } from "./shared/utils/price.js";
+import { removeVariant } from "./shared/utils/itemVariants.js";
 import { modifyQuantityHandler } from "./shared/utils/quantity.js";
 import { addToCart } from "./shared/components/addToCart.js";
 import { updateArticleNb } from "./shared/components/preload.js";
@@ -12,7 +13,6 @@ import { informationBox } from "./shared/components/informationBox.js";
 const articleDOM = document.querySelector("article");
 const totalPriceDOM = document.querySelector("#total-price");
 const threeTimesPriceDOM = document.querySelector("#three-times-price");
-const emptyCartDOM = document.querySelector("#empty-cart");
 const cartContentDOM = document.querySelector("#cart-content");
 const items = Object.values(localStorage).map((item) => JSON.parse(item));
 
@@ -88,18 +88,6 @@ items.forEach(async (item, i) => {
       const itemsDOM = document.querySelectorAll(".cart-item");
 
       actualizeTotalPrices(totalPriceDOM, threeTimesPriceDOM);
-
-      const removeVariant = (articleName, variantToDelete) => {
-        const item = JSON.parse(localStorage.getItem(articleName));
-        localStorage.removeItem(articleName);
-        const variants = item.variants;
-        item.variants = [];
-        variants.forEach((variant) => {
-          variant.lense !== variantToDelete && item.variants.push(variant);
-        });
-        item.variants.length &&
-          localStorage.setItem(articleName, JSON.stringify(item));
-      };
 
       deleteBtns.forEach((btn) => {
         btn.addEventListener("click", () => {

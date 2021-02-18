@@ -1,7 +1,8 @@
-import { getItemVariants } from "../utils/price.js";
+import { getItemVariants } from "../utils/itemVariants.js";
 const body = document.querySelector("body");
 const articleNbDOM = document.querySelector(".article-nb ");
 
+// Prevent the element from transitioning on the page loading.
 document.addEventListener("DOMContentLoaded", body.classList.remove("preload"));
 
 export const updateArticleNb = () => {
